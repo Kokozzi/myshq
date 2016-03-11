@@ -1,0 +1,6 @@
+Models Changes:
+python manage.py makemigrations
+python manage.py migrate
+
+Server Start:
+python manage.py runserver 0.0.0.0:8000

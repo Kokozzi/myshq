@@ -1,0 +1,35 @@
+{
+	"Switches":
+	[ 
+		{"name": "Switch1","IpAddressConn": "10.30.1.72","IpAddress": "10.30.1.186", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+			"Ports":
+			[
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+			]
+		},
+		{"name": "Switch2","IpAddressConn": "10.30.1.71","IpAddress": "10.30.1.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+			"Ports":
+			[
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+			]
+		},
+		{"name": "Switch3","IpAddressConn": "10.32.1.76","IpAddress": "10.30.2.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+			"Ports":
+			[
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+			]
+		}
+	], 
+	"Links":
+	[ 
+		{"port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "switch_src" : "Switch1", "switch_dst" : "Switch2", "Link_found": "0/1", "Bandwidth": "10"}
+	], 	
+	"Hosts":
+	[
+		{"IpAddressHost": "10.0.0.1", "hw_addr_host": "30:00:00:00:0a:01", "Switch_port_host": "Ethernet1/0/3", "DateStartConn_host": "25.11.2015", "TimeStartConn_host": "10:00"}
+	],
+	"DHCP_information":
+	[
+		{"IpAddressDHCP": "10.0.0.5", "hw_addr_DHCP": "30:00:00:00:0a:01", "Switch_port_DHCP": "Ethernet1/0/3", "DateStartConn_DHCP": "25.11.2015", "TimeStartConn_DHCP": "10:00"}
+	]
+}

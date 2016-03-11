@@ -1,0 +1,9 @@
+{% extends "devices/base.html" %}
+
+{% block device_add %}
+<h1>Добавить устройство</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-primary">Сохранить</button>
+</form>
+{% endblock device_add %}
