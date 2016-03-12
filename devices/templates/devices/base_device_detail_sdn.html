@@ -1,0 +1,69 @@
+{% extends "devices/base.html" %}
+
+{% block device_detail %}
+	<div class="col-md-6">
+		<h1>{{ object.hostname }}</h1>
+		<table class="table table-bordered">
+			<tr>
+				<th scope="row">Device Type</th>
+				<td>{{ object.device_type }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Vendor</th>
+				<td>{{ object.company }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Protocol Version</th>
+				<td>{{ object.protocol_vers }}</td>
+			</tr>
+			<tr>
+				<th scope="row">IP Address</th>
+				<td>{{ object.ip }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Connection IP Address</th>
+				<td>{{ object.ip_conn }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Port Number</th>
+				<td>{{ object.port }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Hardware Address</th>
+				<td>{{ object.hw_address }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Connection Start Date</th>
+				<td>{{ object.date_start_conn }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Connection Start Time</th>
+				<td>{{ object.time_start_conn }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Serial Number</th>
+				<td>{{ object.serial }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Config</th>
+				<td>{{ object.config }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Current Features</th>
+				<td>{{ object.curr_features }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Advertised Features</th>
+				<td>{{ object.advert_features }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Supported Features</th>
+				<td>{{ object.supp_features }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Peer Features</th>
+				<td>{{ object.peer_features }}</td>
+			</tr>
+		</table>
+	</div>
+{% endblock device_detail %}
