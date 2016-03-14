@@ -6,12 +6,12 @@ from .models import Device, SDN_Device
 from .forms import AddDeviceForm
 
 
-class AllListView(ListView):
+class DeviceListView(ListView):
     model = Device
     template_name = 'devices/index_list_all.html'
 
     def get_context_data(self, **kwargs):
-        ctx = super(AllListView, self).get_context_data(**kwargs)
+        ctx = super(DeviceListView, self).get_context_data(**kwargs)
         ctx['sdn'] = SDN_Device.objects.all()
         return ctx
 
@@ -23,11 +23,10 @@ class DeviceInfoView(DetailView):
 
 class SDNInfoView(DetailView):
     model = SDN_Device
-    template_name = 'devices/base_device_detail_sdn.html'
+    template_name = 'devices/index_sdn_detail.html'
 
 
 def base_page_view(request):
-    # return render(request, 'devices/base_general_info.html')
     return render(request, 'devices/index_general_info.html')
 
 
