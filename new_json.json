@@ -1,22 +1,22 @@
 {
 	"Switches":
 	[ 
-		{"name": "Switch1","IpAddressConn": "10.30.1.72","IpAddress": "10.30.1.186", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+		{"name": "Switch1","IpAddressConn": "10.30.1.72","IpAddress": "10.30.1.186", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
 			]
 		},
-		{"name": "Switch2","IpAddressConn": "10.30.1.71","IpAddress": "10.30.1.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+		{"name": "Switch2","IpAddressConn": "10.30.1.71","IpAddress": "10.30.1.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
 			]
 		},
-		{"name": "Switch3","IpAddressConn": "10.32.1.76","IpAddress": "10.30.2.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up/down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
+		{"name": "Switch3","IpAddressConn": "10.32.1.76","IpAddress": "10.30.2.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up/down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
 			]
 		}
 	], 

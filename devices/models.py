@@ -47,6 +47,7 @@ class SDN_Device(models.Model):
     advert_features = models.CharField(max_length=150, blank=True)
     supp_features = models.CharField(max_length=150, blank=True)
     peer_features = models.CharField(max_length=150, blank=True)
+    last_polled = models.DateTimeField()
 
     def __str__(self):
         return self.hostname
