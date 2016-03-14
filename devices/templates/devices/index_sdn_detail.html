@@ -1,0 +1,88 @@
+{% extends "devices/index.html" %}
+{% load staticfiles %}
+
+{% block legacy_detail %}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+	                            <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
+                                <td><h3>{{ object.hostname }}</h3>{{ object.device_type }}<br>{{ object.ip }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Характеристики устройства </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped">
+                            <tbody>
+								<tr>
+									<th scope="row">Vendor</th>
+									<td>{{ object.company }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Protocol Version</th>
+									<td>{{ object.protocol_vers }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Connection IP Address</th>
+									<td>{{ object.ip_conn }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Port Number</th>
+									<td>{{ object.port }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Hardware Address</th>
+									<td>{{ object.hw_address }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Connection Start Date</th>
+									<td>{{ object.date_start_conn }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Connection Start Time</th>
+									<td>{{ object.time_start_conn }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Serial Number</th>
+									<td>{{ object.serial }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Config</th>
+									<td>{{ object.config }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Current Features</th>
+									<td>{{ object.curr_features }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Advertised Features</th>
+									<td>{{ object.advert_features }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Supported Features</th>
+									<td>{{ object.supp_features }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Peer Features</th>
+									<td>{{ object.peer_features }}</td>
+								</tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+{% endblock legacy_detail %}
