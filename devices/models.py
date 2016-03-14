@@ -18,7 +18,7 @@ class Device(models.Model):
 
     status = models.IntegerField(default=0)
     last_polled = models.DateTimeField(blank=True, null=True)
-    last_updated = models.DateTimeField(blank=True, null=True, auto_now=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
 
     icon = models.CharField(max_length=40, blank=True)
 
@@ -67,16 +67,3 @@ class SDN_Port(models.Model):
 
     def __str__(self):
         return self.name
-
-
-"""
-OVSWITCH = 'OV'
-    LEGACY = 'LE'
-    DEVICE_TYPE_CHOISES = (
-        (OVSWITCH, 'Open vSwitch'),
-        (LEGACY, 'Legacy Device'),
-        ('', 'Выбрать...',)
-    )
-    device_type = models.CharField("Device Type", max_length=2,
-                                   blank=False, choices=DEVICE_TYPE_CHOISES)
-"""

@@ -1,0 +1,74 @@
+{% extends "devices/index.html" %}
+{% load staticfiles %}
+
+{% block legacy_detail %}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                            	{% if object.icon == "Cisco" %}
+	                                <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'sdn_proj/img/cisco.png' %}"></td>
+	                            {% elif object.icon == "Juniper" %}
+	                           		<td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'sdn_proj/img/junos.png' %}"></td>
+	                            {% else %}
+	                                <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
+	                            {% endif %}
+                                <td><h3>{{ object.hostname }}</h3>{{ object.location }}<br>{{ object.ip }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Характеристики устройства </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped">
+                            <tbody>
+								<tr>
+									<th scope="row">System Name</th>
+									<td>{{ object.sysname }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Hardware</th>
+									<td>{{ object.hardware }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Operating System</th>
+									<td>{{ object.os }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Serial Number</th>
+									<td>{{ object.serial }}</td>
+								</tr>
+								<tr>
+									<th scope="row">SNMP Community</th>
+									<td>{{ object.community }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Uptime</th>
+									<td>{{ object.uptime }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Last Polled</th>
+									<td>{{ object.last_polled }}</td>
+								</tr>
+								<tr>
+									<th scope="row">Last Updated</th>
+									<td>{{ object.last_updated }}</td>
+								</tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+{% endblock legacy_detail %}

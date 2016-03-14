@@ -1,0 +1,104 @@
+{% extends "devices/index.html" %}
+{% load staticfiles %}
+
+{% block list_all %}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Legacy Устройства </h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Vendor</th>
+                                <th>Hostname</th>
+                                <th>IP Address</th>
+                                <th>Hardware</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if object_list %}
+	                            {% for device in object_list %}
+	                            <tr>
+	                                {% if device.status == 1 %}
+	                                	<td><h4><span class="label label-primary">up</span></h4></td>
+	                                {% elif device.status == 0 %}
+	                                	<td><h4><span class="label label-danger">down</span></h4></td>
+	                                {% else %}
+	                                	<td>Unknown</td>
+	                                {% endif %}
+
+	                                {% if device.icon == "Cisco" %}
+	                                	<td><img src="{% static 'sdn_proj/img/cisco.png' %}"></td>
+	                                {% elif device.icon == "Juniper" %}
+	                                	<td><img src="{% static 'sdn_proj/img/junos.png' %}"></td>
+	                                {% else %}
+	                                	<td>Unknown</td>
+	                                {% endif %}
+
+	                                <td><a href="{% url 'devices:legacy_detail' device.id %}">{{ device.hostname }}</a></td>
+	                                <td> {{ device.ip }} </td>
+	                                <td> {{ device.hardware }} </td>
+	                            </tr>
+	                            {% endfor %}
+	                        {% else %}
+	                        	<tr>No Devices</tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>SDN Устройства </h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Device Type</th>
+                                <th>Hostname</th>
+                                <th>IP Address</th>
+                                <th>Protocol vers.</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							{% if object_list %}
+	                            {% for sd in sdn %}
+		                            
+		                            <tr>
+		                                {% if sd.status == 1 %}
+		                                	<td><h4><span class="label label-primary">up</span></h4></td>
+		                                {% elif sd.status == 0 %}
+		                                	<td><h4><span class="label label-danger">down</span></h4></td>
+		                                {% else %}
+		                                	<td>Unknown</td>
+		                                {% endif %}
+
+		                                <td>{{ sd.device_type }}</td>
+		                                <td><a href="{% url 'devices:sdn_detail' sd.id %}">{{ sd.hostname }}</a></td>
+		                                <td> {{ sd.ip }} </td>
+		                                <td> {{ sd.protocol_vers }} </td>
+		                            </tr>
+		                            
+	                            {% endfor %}
+	                        {% else %}
+	                        	<tr>No Devices</tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+{% endblock list_all %}
