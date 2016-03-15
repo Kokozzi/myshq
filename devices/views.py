@@ -2,7 +2,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect
 
-from .models import Device, SDN_Device
+from .models import Device, SDN_Device  # , SDN_Port
 from .forms import AddDeviceForm
 
 
@@ -24,6 +24,12 @@ class DeviceInfoView(DetailView):
 class SDNInfoView(DetailView):
     model = SDN_Device
     template_name = 'devices/index_sdn_detail.html'
+    """
+    def get_context_data(self, **kwargs):
+        ctx = super(SDNInfoView, self).get_context_data(**kwargs)
+        dev = self.objects
+        ctx['sdn_port'] = SDN_Port.objects.all()
+    """
 
 
 def base_page_view(request):

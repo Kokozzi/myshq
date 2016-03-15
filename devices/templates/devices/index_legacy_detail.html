@@ -1,6 +1,8 @@
 {% extends "devices/index.html" %}
 {% load staticfiles %}
 
+{% block active_devices %}<li class="active">{% endblock active_devices %}
+
 {% block legacy_detail %}
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -25,6 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
+                <div class="panel panel-default">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Характеристики устройства </h5>
@@ -68,6 +71,7 @@
                         </table>
                     </div>
                 </div>
+            </div>
             </div>
             </div>
         </div>

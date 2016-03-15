@@ -38,15 +38,13 @@
                         SDN
                     </div>
                 </li>
-                <li>
+                {% block active_main_page %}<li>{% endblock active_main_page %}
                     <a href="{% url 'devices:base' %}"><i class="fa fa-star"></i> <span class="nav-label">Главная страница</span></a>
                 </li>
-                <li>
+                {% block active_devices %}<li>{% endblock active_devices %}
                         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Устройства</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="{% url 'devices:device_list'%}">Все устройства</a></li>
-                            <li><a href="dashboard_2.html">Legacy-устройства</a></li>
-                            <li><a href="dashboard_3.html">SDN-устройства</a></li>
                         </ul>
                 </li>
                 <li>

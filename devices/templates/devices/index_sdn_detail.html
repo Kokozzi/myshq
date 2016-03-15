@@ -1,6 +1,8 @@
 {% extends "devices/index.html" %}
 {% load staticfiles %}
 
+{% block active_devices %}<li class="active">{% endblock active_devices %}
+
 {% block legacy_detail %}
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -19,6 +21,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
+                <div class="panel panel-default">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Характеристики устройства </h5>
@@ -83,6 +86,48 @@
                     </div>
                 </div>
             </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Характеристики интерфейсов </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Interface</th>
+                                <th>Hardware Address</th>
+                                <th>TX Bytes</th>
+                                <th>RX Bytes</th>
+                                <th>TX Packets</th>
+                                <th>RX Packets</th>
+                                <th>Dropped</th>
+                                <th>Errors</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th><h4><span class="label label-primary">Ethernet1/0/3</span></h4></th>
+                                <td>37:00:03:00:1a:81</td>
+                                <td>5000</td>
+                                <td>89901</td>
+                                <td>123213</td>
+                                <td>1233</td>
+                                <td>0</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th><h4><span class="label label-danger">Ethernet1/0/4</span></h4></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                </div>
             </div>
         </div>
 {% endblock legacy_detail %}
