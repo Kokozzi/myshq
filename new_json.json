@@ -4,19 +4,21 @@
 		{"name": "Switch1","IpAddressConn": "10.30.1.72","IpAddress": "10.30.1.186", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "43","TX_Pkts": "1321","RX_Pkts": "8765","Dropped": "0","Error": "3"},
+				{"name": "Ethernet1/0/2","hw_addr": "37:00:03:00:1a:82","connection_status": "down","TX_bytes": "10","RX_bytes": "632","TX_Pkts": "123","RX_Pkts": "213","Dropped": "2","Error": "1"},
+				{"name": "Ethernet1/0/5","hw_addr": "37:00:03:00:1a:83","connection_status": "up","TX_bytes": "200","RX_bytes": "23","TX_Pkts": "13","RX_Pkts": "13","Dropped": "1","Error": "0"}
 			]
 		},
 		{"name": "Switch2","IpAddressConn": "10.30.1.71","IpAddress": "10.30.1.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "down", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "down","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "2"}
 			]
 		},
 		{"name": "Switch3","IpAddressConn": "10.32.1.76","IpAddress": "10.30.2.188", "portNumber": "6653","hardwareAddress": "00:00:00:00:00:00:01","DateStartConn": "25.11.2015", "TimeStartConn": "10:00","CompanyName": "Nicra, Inc.","TypeOfSwitch": "Open vSwitch", "ProtocolVersion": "10","SN": "None","config": "config","state": "up", "currentFeatures": "currentFeatures","advertisedFeatures": "advertisedFeatures","supportedFeatures": "supportedFeatures","peerFeatures": "peerFeatures",
 			"Ports":
 			[
-				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "Error"}
+				{"name": "Ethernet1/0/3","hw_addr": "37:00:03:00:1a:81","connection_status": "up","TX_bytes": "0","RX_bytes": "0","TX_Pkts": "0","RX_Pkts": "0","Dropped": "0","Error": "0"}
 			]
 		}
 	], 

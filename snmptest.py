@@ -28,6 +28,7 @@ def device_polling(device, comm):
     uptime = session.walk('SNMPv2-MIB::sysUpTime')
 
     if descr[0].value.startswith("Cisco"):
+        icon = "Cisco"
         os = os_detect(descr, 'Cisco')
 
         hardware = session.get('1.3.6.1.2.1.47.1.1.1.1.13.1')
@@ -39,11 +40,12 @@ def device_polling(device, comm):
             serial = session.get('1.3.6.1.2.1.47.1.1.1.1.11.1001')
 
     if descr[0].value.startswith("Juniper"):
+        icon = "Juniper"
         os = os_detect(descr, 'Juniper')
         hardware = session.get('1.3.6.1.4.1.2636.3.1.2.0')
         serial = session.get('1.3.6.1.4.1.2636.3.1.3.0')
 
-    return sysname[0].value, location[0].value, uptime[0].value, hardware.value, serial.value, os
+    return sysname[0].value, location[0].value, uptime[0].value, hardware.value, serial.value, os, icon
 
 conn = sqlite3.connect('db.sqlite3')
 cursor = conn.cursor()
@@ -56,10 +58,10 @@ for row in data:
         cursor.execute(
             "UPDATE devices_device SET sysname=?, \
             location=?, uptime=?, hardware=?, serial=?, \
-            os=?, status=1, last_polled=?\
+            os=?, icon=?, status=1, last_polled=?, last_updated=?\
             WHERE ID=?", (result[0], result[1], result[2],
                           result[3], result[4], result[5],
-                          cur, row[0]))
+                          result[6], cur, cur, row[0]))
         conn.commit()
         print("Device " + row[1] + " polled")
     except EasySNMPTimeoutError:
