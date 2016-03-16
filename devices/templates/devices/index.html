@@ -10,11 +10,14 @@
 
     <title>SDN Project | Main </title>
 
-    <link href="{% static 'sdn_proj/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'sdn_proj/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
 
-    <link href="{% static 'sdn_proj/css/animate.css' %}" rel="stylesheet">
-    <link href="{% static 'sdn_proj/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% block css_topology %}
+    {% endblock css_topology %}
 
 </head>
 
@@ -44,20 +47,20 @@
                 {% block active_devices %}<li>{% endblock active_devices %}
                         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Устройства</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{% url 'devices:device_list'%}">Все устройства</a></li>
+                            <li><a href="{% url 'devices:device_list' %}">Все устройства</a></li>
                         </ul>
                 </li>
-                <li>
-                    <a href="minor.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Топологии</span> </a>
+                {% block active_topology %}<li>{% endblock active_topology %}
+                    <a href="{% url 'devices:topology' %}"><i class="fa fa-sitemap"></i> <span class="nav-label">Топологии</span> </a>
                 </li>
                 <li>
-                    <a href="minor.html"><i class="fa fa-laptop"></i> <span class="nav-label">Cервисы</span> </a>
+                    <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Cервисы</span> </a>
                 </li>
                 <li>
-                    <a href="minor.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Статистика</span> </a>
+                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Статистика</span> </a>
                 </li>
                 <li>
-                    <a href="minor.html"><i class="fa fa-table"></i> <span class="nav-label">История</span> </a>
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">История</span> </a>
                 </li>
             </ul>
 
@@ -91,6 +94,8 @@
         {% endblock list_all %}
         {% block legacy_detail %}
         {% endblock legacy_detail %}
+        {% block topology %}
+        {% endblock topology %}
         <div class="footer">
             <div>
                 <strong>Copyright</strong> SDN Project Company &copy; 2016
@@ -101,14 +106,14 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="{% static 'sdn_proj/js/jquery-2.1.1.js' %}"></script>
-<script src="{% static 'sdn_proj/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'sdn_proj/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
-<script src="{% static 'sdn_proj/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="{% static 'sdn_proj/js/inspinia.js' %}"></script>
-<script src="{% static 'sdn_proj/js/plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'js/inspinia.js' %}"></script>
+<script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
 
 
 </body>

@@ -36,6 +36,10 @@ def base_page_view(request):
     return render(request, 'devices/index_general_info.html')
 
 
+def topology_view(request):
+    return render(request, 'devices/index_topology.html')
+
+
 def add_device(request):
     if request.method == "POST":
         form = AddDeviceForm(request.POST)
