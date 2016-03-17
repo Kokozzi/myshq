@@ -37,7 +37,53 @@ def base_page_view(request):
 
 
 def topology_view(request):
-    return render(request, 'devices/index_topology.html')
+    nodes = SDN_Device.objects.all()
+    id_dict = dict()
+    node_array = list()
+    # link_array = list()
+    ind = 0
+    for dev in nodes:
+        id_dict = {str(dev.id): ind}
+        node_array.append('"id": ' + str(ind) + ', \
+                      "name": "' + str(dev.hostname) + '", \
+                      "icon": "../../static/img/switch.svg", \
+                      "IpAddress": "' + str(dev.ip) + '", \
+                      "ip_conn": "' + str(dev.ip_conn) + '", \
+                      "port": ' + str(dev.port) + ', \
+                      "hw_address": "' + str(dev.hw_address) + '", \
+                      "company": "' + str(dev.company) + '", \
+                      "device_type": "' + str(dev.device_type) + '", \
+                      "protocol_vers": "' + str(dev.protocol_vers) + '", \
+                      "serial": "' + str(dev.serial) + '"')
+        ind += 1
+    """
+    for dev in nodes:
+        link_array.append('"source": ' + str(id_dict[dev.id]) + ', \
+                            "target": ' + str[id_dict[dev.id]] + '')
+
+
+    node = ('"id": 0, "name": "YYYY", "icon": "../../static/img/switch.svg", \
+             "IpAddress": "10.30.1.1"',
+            '"id": 1, "name": "ZZZZ", "icon": "../../static/img/router.svg", \
+            "IpAddress": "10.20.1.1"',
+        '"id": 2, "name": "Router 2", "icon": "../../static/img/router.svg", \
+            "IpAddress": "10.31.1.1"',
+        '"id": 3, "name": "Switch 2", "icon": "../../static/img/switch.svg", \
+            "IpAddress": "10.36.2.1"',
+        '"id": 4, "name": "Switch 3", "icon": "../../static/img/switch.svg", \
+            "IpAddress": "10.31.5.1"')
+
+    link = ('"source": 1, "target": 2, "name": "A-B"',
+            '"source": 1, "target": 6, "name": "A-C-1"',
+            '"source": 1, "target": 6, "name": "A-C-2"',
+            '"source": 2, "target": 6, "name": "A-F-2"')
+    """
+    link = ('"source": 1, "target": 2, "name": "A-B"',
+            '"source": 1, "target": 2, "name": "A-C-1"',
+            '"source": 0, "target": 1, "name": "A-C-1"',
+            '"source": 0, "target": 2, "name": "A-C-1"')
+    context = {'node': node_array, 'link': link, 'devices': nodes}
+    return render(request, 'devices/index_topology.html', context)
 
 
 def add_device(request):

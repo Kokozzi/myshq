@@ -18,21 +18,17 @@
             $(function(){
                 var data = {
                     "nodes": [
-                        { "id": 0, "name": "Switch 1", "icon": "../../static/img/switch.svg", "IpAddress": "10.30.1.1" },
-                        { "id": 1, "name": "Switch 2", "icon": "../../static/img/switch.svg", "IpAddress": "10.20.1.1" },
-                        { "id": 2, "name": "Switch 3", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.1.1" },
-                        { "id": 3, "name": "Switch 4", "icon": "../../static/img/switch.svg", "IpAddress": "10.36.2.1" },
-                        { "id": 4, "name": "Switch 5", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.5.1" }
+                        {% autoescape off %}
+                        {% for device in node %}
+                        { {{ device }} },
+                        {% endfor %}
+                        
                     ],
-                    "links": [     
-                        { "source": 0, "target": 1, "name": "A-B" },
-                        { "source": 0, "target": 2, "name": "A-C-1" },
-                        { "source": 0, "target": 2, "name": "A-C-2" },
-                        { "source": 0, "target": 3, "name": "A-D-1" },
-                        { "source": 0, "target": 4, "name": "A-E-1" },
-                        { "source": 3, "target": 4, "name": "A-G-2" },
-                        { "source": 2, "target": 3, "name": "A-D-2" },
-                        { "source": 1, "target": 4, "name": "A-F-2" },
+                    "links": [   
+                        {% for l in link %}  
+                        { {{ l }} },
+                        {% endfor %}
+                        {% endautoescape %}
                     ]
                 };          
 
@@ -47,16 +43,21 @@
                 setLinkIndexAndNum();
 
                 var w = document.getElementById('page-wrapper').offsetWidth - 40,
-                    h = document.documentElement.clientHeight - 150;
+                    h = document.documentElement.clientHeight/1.6;
 
                 var force = d3.layout.force()
-                              .nodes(d3.values(data.nodes))
-                              .links(data.links)
                               .size([w, h])
-                              .linkDistance(400)
-                              .charge(-1050)
-                              .on("tick", tick)
-                              .start();
+                              .linkDistance(250)
+                              .charge(-1200)
+                              .on("tick", tick);
+
+                var drag = force.drag()
+                                .on("dragstart", dragstart);
+                              
+                    force
+                        .nodes(d3.values(data.nodes))
+                        .links(data.links)
+                        .start();
 
                 var svg = d3.select(".graphContainer").append("svg:svg")
                             .attr("width", w)
@@ -74,7 +75,7 @@
                                 .enter().append("g")
                                 .attr("class", "circle")
                                 .on("click", OnClickNode)
-                                .call(force.drag);
+                                .call(drag);
                     circle.append("svg:image")
                                 .attr("xlink:href", function(d) { return d.icon; })
                                 .attr("x", "-25px")
@@ -117,7 +118,6 @@
                 var overlayInner = overlay.append("div")
                                    .attr("class", "njg-inner");
 
-
                 // Use elliptical arc path segments to doubly-encode directionality.
                 function tick() {
                     path.attr("d", function(d) {
@@ -130,11 +130,13 @@
                         {
                             // if there are multiple links between these two nodes, we need generate different dr for each path
                             dr = dr/(1 + (1/lTotalLinkNum) * (d.linkindex - 1));
+                            // generate svg path
+                            return "M" + d.source.x + "," + d.source.y + 
+                                "A" + dr + "," + dr + " 0 0 1," + d.target.x + "," + d.target.y + 
+                                "A" + dr + "," + dr + " 0 0 0," + d.source.x + "," + d.source.y; 
                         }       
                         // generate svg path
-                        return "M" + d.source.x + "," + d.source.y + 
-                            "A" + dr + "," + dr + " 0 0 1," + d.target.x + "," + d.target.y + 
-                            "A" + dr + "," + dr + " 0 0 0," + d.source.x + "," + d.source.y;    
+                        return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y;   
                     });
 
                     // Add tooltip to the connection path
@@ -142,19 +144,60 @@
                         .text(function(d, i) { return d.name; });
 
                     circle.attr("transform", function(d) {
-                        return "translate(" + d.x + "," + d.y + ")";
-                    });
+                        return "translate(" + d.x + "," + d.y + ")"; });
+                          //.classed("fixed", d.fixed = true);
 
                     text.attr("transform", function(d) {
                         return "translate(" + d.x + "," + d.y + ")";
                     });
                 } 
 
+                function dragstart(d) {
+                  d3.select(this).classed("fixed", d.fixed = true);
+                }
+
                 function OnClickNode(d) {
                     var overlay = d3.select(".njg-overlay"),
                         overlayInner = d3.select(".njg-overlay > .njg-inner"),
-                        html = "<p><b>Название</b>: " + d.name + "</p>";
-                    if(d.IpAddress) { html += "<p><b>IP Address</b>: " + d.IpAddress + "</p>"; }
+                        //html = "<p><b>Название</b>: " + d.name + "</p>";
+                        html = "<h4>" + d.name + "</h4>";
+                    //if(d.IpAddress) { html += "<p><b>IP Address</b>: " + d.IpAddress + "</p>"; }
+                    html+='<table class="table table-striped">';
+                    html+='<tbody>';
+                    html+='<tr>';
+                    html+='<th scope="row">Device Type</th>';
+                    html+='<td>' + d.device_type + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">Protocol ver.</th>';
+                    html+='<td>' + d.protocol_vers + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">Vendor</th>';
+                    html+='<td>' + d.company + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">IP Address</th>';
+                    html+='<td>' + d.IpAddress + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">IP Connection</th>';
+                    html+='<td>' + d.ip_conn + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">Port</th>';
+                    html+='<td>' + d.port + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">HW Address</th>';
+                    html+='<td>' + d.hw_address + '</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                    html+='<th scope="row">Serial</th>';
+                    html+='<td>' + d.serial + '</td>';
+                    html+='</tr>';
+                    html+='</tbody>';
+                    html+='</table>';
                     overlayInner.html(html);
                     overlay.classed("njg-hidden", false);
                     overlay.style("display", "block");
@@ -212,6 +255,7 @@
                 }
 
                 //any links with duplicate source and target get an incremented 'linknum'
+                //data.links.length
                 function setLinkIndexAndNum()
                 {                               
                     for (var i = 0; i < data.links.length; i++) 
@@ -240,5 +284,26 @@
             });         
             </script>                    
             </div>    
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                {% if object.icon == "Cisco" %}
+                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/cisco.png' %}"></td>
+                                {% elif object.icon == "Juniper" %}
+                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/junos.png' %}"></td>
+                                {% else %}
+                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
+                                {% endif %}
+                                <td><h3>{{ object.hostname }}</h3>{{ object.location }}<br>{{ object.ip }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 </div>
 {% endblock topology %}
