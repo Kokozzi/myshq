@@ -41,12 +41,14 @@ def topology_view(request):
     id_dict = dict()
     node_array = list()
     # link_array = list()
+    image = ("../../static/img/switch.svg",
+             "../../static/img/switch-d.svg", "../../static/img/switch.svg")
     ind = 0
     for dev in nodes:
         id_dict = {str(dev.id): ind}
         node_array.append('"id": ' + str(ind) + ', \
                       "name": "' + str(dev.hostname) + '", \
-                      "icon": "../../static/img/switch.svg", \
+                      "icon": "' + str(image[ind]) + '", \
                       "IpAddress": "' + str(dev.ip) + '", \
                       "ip_conn": "' + str(dev.ip_conn) + '", \
                       "port": ' + str(dev.port) + ', \

@@ -5,6 +5,12 @@
 <link href="{% static 'css/netjsongraph.css' %}" rel="stylesheet">
 <link href="{% static 'css/netjsongraph-theme.css' %}" rel="stylesheet">
 <link href="{% static 'css/d3test.css' %}" rel="stylesheet">
+<style>
+    .col-lg-12 {
+        bottom: 5%;
+        position: absolute;
+    }
+</style>
 {% endblock css_topology %}
 
 {% block active_topology %}<li class="active">{% endblock active_topology %}
@@ -43,8 +49,7 @@
                 setLinkIndexAndNum();
 
                 var w = document.getElementById('page-wrapper').offsetWidth - 40,
-                    h = document.documentElement.clientHeight/1.6;
-
+                    h = document.documentElement.clientHeight*0.85;
                 var force = d3.layout.force()
                               .size([w, h])
                               .linkDistance(250)
@@ -118,6 +123,23 @@
                 var overlayInner = overlay.append("div")
                                    .attr("class", "njg-inner");
 
+                // Connections List (bottom table)
+
+                var connlist = d3.select(".col-lg-12")
+                                 .attr("class", "connlist-hidden")
+
+                var closeConnlist = d3.select(".panel")
+                                        .append("a")
+                                        .attr("class", "njg-close")
+                                        .on("click", function() {
+                                            connlist.attr("class", "connlist-hidden");
+                                        svg = d3.selectAll("svg")
+                                            .attr("width", w)
+                                            .attr("height", h);
+
+                                        force.size([w, h]);
+                                        });
+
                 // Use elliptical arc path segments to doubly-encode directionality.
                 function tick() {
                     path.attr("d", function(d) {
@@ -157,66 +179,51 @@
                 }
 
                 function OnClickNode(d) {
+
                     var overlay = d3.select(".njg-overlay"),
                         overlayInner = d3.select(".njg-overlay > .njg-inner"),
-                        //html = "<p><b>Название</b>: " + d.name + "</p>";
                         html = "<h4>" + d.name + "</h4>";
-                    //if(d.IpAddress) { html += "<p><b>IP Address</b>: " + d.IpAddress + "</p>"; }
-                    html+='<table class="table table-striped">';
-                    html+='<tbody>';
-                    html+='<tr>';
-                    html+='<th scope="row">Device Type</th>';
-                    html+='<td>' + d.device_type + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">Protocol ver.</th>';
-                    html+='<td>' + d.protocol_vers + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">Vendor</th>';
-                    html+='<td>' + d.company + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">IP Address</th>';
-                    html+='<td>' + d.IpAddress + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">IP Connection</th>';
-                    html+='<td>' + d.ip_conn + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">Port</th>';
-                    html+='<td>' + d.port + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">HW Address</th>';
-                    html+='<td>' + d.hw_address + '</td>';
-                    html+='</tr>';
-                    html+='<tr>';
-                    html+='<th scope="row">Serial</th>';
-                    html+='<td>' + d.serial + '</td>';
-                    html+='</tr>';
-                    html+='</tbody>';
-                    html+='</table>';
+                    html+='<table class="table table-striped"><tbody>';
+                    html+='<tr><th scope="row">Device Type</th><td>' + d.device_type + '</td></tr>';
+                    html+='<tr><th scope="row">Protocol ver.</th><td>' + d.protocol_vers + '</td></tr>';
+                    html+='<tr><th scope="row">Vendor</th><td>' + d.company + '</td></tr>';
+                    html+='<tr><th scope="row">IP Address</th><td>' + d.IpAddress + '</td></tr>';
+                    html+='<tr><th scope="row">IP Connection</th><td>' + d.ip_conn + '</td></tr>';
+                    html+='<tr><th scope="row">Port</th><td>' + d.port + '</td></tr>';
+                    html+='<tr><th scope="row">HW Address</th><td>' + d.hw_address + '</td></tr>';
+                    html+='<tr><th scope="row">Serial</th><td>' + d.serial + '</td></tr>';
+                    html+='</tbody></table>';
                     overlayInner.html(html);
                     overlay.classed("njg-hidden", false);
                     overlay.style("display", "block");
+                    
+                    connlist.attr("class", "connlist-visible");
+
+                    tab_h = document.getElementById('link_table').offsetHeight + 15;
+
+                    svg = d3.selectAll("svg")
+                            .attr("width", w)
+                            .attr("height", h-tab_h);
+
+                    force.size([w, h-tab_h]);
+
                     // set "open" class to current node
                     removeOpenClass();
                     d3.select(this).classed("njg-open", true);
                 } 
 
                 function onClickLink(d) {
-                    var overlay = d3.select(".njg-overlay"),
+ /*                   var overlay = d3.select(".njg-overlay"),
                         overlayInner = d3.select(".njg-overlay > .njg-inner"),
                         html = "<p><b>Source</b>: " + (d.source.name || d.source.id) + "</p>";
                     html += "<p><b>Target</b>: " + (d.target.name || d.target.id) + "</p>";
                     html += "<p><b>Route ID</b>: " + d.name + "</p>";
                     overlayInner.html(html);
                     overlay.classed("njg-hidden", false);
-                    overlay.style("display", "block");
+                    overlay.style("display", "block");*/
                     // set "open" class to current link
                     removeOpenClass();
+                    overlay.classed("njg-hidden", true);
                     d3.select(this).classed("njg-open", true);
                 }
 
@@ -284,25 +291,49 @@
             });         
             </script>                    
             </div>    
+            </div> 
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                {% if object.icon == "Cisco" %}
-                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/cisco.png' %}"></td>
-                                {% elif object.icon == "Juniper" %}
-                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/junos.png' %}"></td>
-                                {% else %}
-                                    <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
-                                {% endif %}
-                                <td><h3>{{ object.hostname }}</h3>{{ object.location }}<br>{{ object.ip }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+            <div id="link_table" class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="ibox-title">
+                        <h5>Links </h5>
                     </div>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width=5%>Status</th>
+                            <th>Vendor</th>
+                            <th>Hostname</th>
+                            <th>IP Address</th>
+                            <th>Hardware</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><h4><span class="label label-primary">up</span></h4></td>
+                            <td>213</td>
+                            <td>Switch1</td>
+                            <td> 10.30.1.1 </td>
+                            <td> CISCO3560 </td>
+                        </tr>
+                        <tr>
+                            <td><h4><span class="label label-danger">down</span></h4></td>
+                            <td>111</td>
+                            <td>Jacob</td>
+                            <td> -20% </td>
+                            <td> 40% </td>
+                        </tr>
+                        <tr>
+                            <td><h4><span class="label label-primary">up</span></h4></td>
+                            <td>123</td>
+                            <td>Samantha</td>
+                            <td> 40% </td>
+                            <td> 40% </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
             </div>
 </div>
