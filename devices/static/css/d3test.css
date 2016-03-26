@@ -2,12 +2,14 @@ path.link {
     fill: none;
     stroke: #666;
     stroke-width: 4px;
-}	
+    cursor: pointer;
+}
 
-circle {
-    fill: #ccc;
-    stroke: #333;
-    stroke-width: 1.5px;
+path.active_link {
+    fill: none;
+    stroke: rgba(216, 179, 80, 0.8);
+    stroke-width: 5px;
+    cursor: pointer;
 }
 
 text {

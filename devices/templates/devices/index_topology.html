@@ -85,6 +85,7 @@
                                 .attr("xlink:href", function(d) { return d.icon; })
                                 .attr("x", "-25px")
                                 .attr("y", "-25px")
+                                .attr("cursor", "pointer")
                                 .attr("width", "75px")
                                 .attr("height", "75px");
 
@@ -135,9 +136,9 @@
                                             connlist.attr("class", "connlist-hidden");
                                         svg = d3.selectAll("svg")
                                             .attr("width", w)
-                                            .attr("height", h);
+                                            .attr("height", h*0.95);
 
-                                        force.size([w, h]);
+                                        force.size([w, h*0.95]);
                                         });
 
                 // Use elliptical arc path segments to doubly-encode directionality.
@@ -207,21 +208,15 @@
 
                     force.size([w, h-tab_h]);
 
+                    d3.selectAll("path").attr("class", "link");
                     // set "open" class to current node
                     removeOpenClass();
                     d3.select(this).classed("njg-open", true);
                 } 
 
                 function onClickLink(d) {
- /*                   var overlay = d3.select(".njg-overlay"),
-                        overlayInner = d3.select(".njg-overlay > .njg-inner"),
-                        html = "<p><b>Source</b>: " + (d.source.name || d.source.id) + "</p>";
-                    html += "<p><b>Target</b>: " + (d.target.name || d.target.id) + "</p>";
-                    html += "<p><b>Route ID</b>: " + d.name + "</p>";
-                    overlayInner.html(html);
-                    overlay.classed("njg-hidden", false);
-                    overlay.style("display", "block");*/
-                    // set "open" class to current link
+                    d3.selectAll("path").attr("class", "link");
+                    d3.select(this).attr("class", "active_link");
                     removeOpenClass();
                     overlay.classed("njg-hidden", true);
                     d3.select(this).classed("njg-open", true);
