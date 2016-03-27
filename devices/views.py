@@ -80,10 +80,12 @@ def topology_view(request):
             '"source": 1, "target": 6, "name": "A-C-2"',
             '"source": 2, "target": 6, "name": "A-F-2"')
     """
-    link = ('"source": 1, "target": 2, "name": "A-B"',
-            '"source": 1, "target": 2, "name": "A-C-1"',
-            '"source": 0, "target": 1, "name": "A-C-1"',
-            '"source": 0, "target": 2, "name": "A-C-1"')
+    link = ('"source": 0, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", \
+        "target": 1, "name": "Z1-Z2", "Link_found": "0", "Bandwidth": "10"',
+            '"source": 0, "port_src": "Ethernet1/0/2", "port_dst": "Ethernet1/0/2", \
+        "target": 2, "name": "Z1-Z3", "Link_found": "1", "Bandwidth": "1"',
+            '"source": 1, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", \
+        "target": 2, "name": "Z2-Z3", "Link_found": "1", "Bandwidth": "15"')
     context = {'node': node_array, 'link': link, 'devices': nodes}
     return render(request, 'devices/index_topology.html', context)
 
