@@ -1,0 +1,70 @@
+path.link {
+    fill: none;
+    stroke: #666;
+    stroke-width: 4px;
+    cursor: pointer;
+}
+
+path.active_link {
+    fill: none;
+    stroke: rgba(216, 179, 80, 0.8);
+    stroke-width: 5px;
+    cursor: pointer;
+}	
+
+text {
+    font: 10px sans-serif;
+    pointer-events: none;
+}
+
+text.shadow {
+    stroke: #fff;
+    stroke-width: 3px;
+    stroke-opacity: .8;
+}
+
+.graphContainer {
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+    width: 60%;
+}
+
+.njg-overlay{
+    background: #fbfbfb;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    color: #6d6357;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13x;
+    line-height: 15px;
+    height: auto;
+    max-width: 400px;
+    min-width: 200px;
+    padding: 15px;
+    right: 10px;
+    top: 10px;
+    width: auto;
+    display: none;
+    position: absolute;
+    z-index: 11;
+}
+
+.njg-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.njg-close{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.njg-close:before { content: "\2716"; }
+
+.connlist-visible {
+    bottom: 5%;
+    width: 98%;
+    position: absolute;
+    display: block;
+    visibility: visible;
+}

@@ -2,9 +2,7 @@
 {% load staticfiles %}
 
 {% block css_topology %}
-<link href="{% static 'css/netjsongraph.css' %}" rel="stylesheet">
-<link href="{% static 'css/netjsongraph-theme.css' %}" rel="stylesheet">
-<link href="{% static 'css/d3test.css' %}" rel="stylesheet">
+<link href="{% static 'css/topology.css' %}" rel="stylesheet">
 <style>
     .col-lg-12 {
         bottom: 5%;
@@ -116,10 +114,7 @@
 
                 var closeOverlay = overlay.append("a")
                                     .attr("class", "njg-close")
-                                    .on("click", function() {
-                                        removeOpenClass();
-                                        overlay.classed("njg-hidden", true);
-                                    });
+                                    .on("click", function() { overlay.classed("njg-hidden", true); });
 
                 var overlayInner = overlay.append("div")
                                    .attr("class", "njg-inner");
@@ -127,13 +122,13 @@
                 // Connections List (bottom table)
 
                 var connlist = d3.select(".col-lg-12")
-                                 .attr("class", "connlist-hidden")
+                                 .attr("class", "njg-hidden")
 
                 var closeConnlist = d3.select(".panel")
                                         .append("a")
                                         .attr("class", "njg-close")
                                         .on("click", function() {
-                                            connlist.attr("class", "connlist-hidden");
+                                            connlist.attr("class", "njg-hidden");
                                         svg = d3.selectAll("svg")
                                             .attr("width", w)
                                             .attr("height", h*0.95);
@@ -198,6 +193,10 @@
                     overlay.classed("njg-hidden", false);
                     overlay.style("display", "block");
                     
+                    var connlist_label = d3.select(".ibox-title");
+                    html = "<h5>" + d.name + " Links</h5>";
+                    connlist_label.html(html);
+
                     connlist.attr("class", "connlist-visible");
 
                     tab_h = document.getElementById('link_table').offsetHeight + 25;
@@ -209,22 +208,15 @@
                     force.size([w, h-tab_h]);
 
                     d3.selectAll("path").attr("class", "link");
-                    // set "open" class to current node
-                    removeOpenClass();
-                    d3.select(this).classed("njg-open", true);
                 } 
 
                 function onClickLink(d) {
                     d3.selectAll("path").attr("class", "link");
                     d3.select(this).attr("class", "active_link");
-                    removeOpenClass();
                     overlay.classed("njg-hidden", true);
                     d3.select(this).classed("njg-open", true);
                 }
 
-                removeOpenClass = function () {
-                    d3.selectAll("svg .njg-open").classed("njg-open", false);
-                };
 
                 // sort the links by source, then target
                 function sortLinks()
