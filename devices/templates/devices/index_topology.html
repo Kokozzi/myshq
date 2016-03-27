@@ -214,8 +214,8 @@
                     
                     connlist.attr("class", "connlist-visible");
 
-                    current_h = h - document.getElementById('link_table').offsetHeight + 15;
-                    current_w = w*0.8;
+                    current_h = h - document.getElementById('link_table').offsetHeight;
+                    current_w = w*0.75;
 
                     svg = d3.selectAll("svg")
                             .attr("width", current_w+50)
