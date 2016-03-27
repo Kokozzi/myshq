@@ -108,13 +108,23 @@
                     .style("font-family", "sans-serif")
                     .text(function(d) { return d.name; });
 
+                var current_h = h,
+                    current_w = w-50;
+
                 // Overlay panel with node information (top-right corner)
                 var overlay = d3.select(".graphContainer").append("div")
                                 .attr("class", "njg-overlay");
 
                 var closeOverlay = overlay.append("a")
                                     .attr("class", "njg-close")
-                                    .on("click", function() { overlay.classed("njg-hidden", true); });
+                                    .on("click", function() { 
+                                        overlay.classed("njg-hidden", true); 
+                                        current_w = w-50;
+                                    svg = d3.selectAll("svg")
+                                            .attr("width", current_w+50)
+                                            .attr("height", current_h);
+                                    force.size([current_w, current_h]);
+                                    });
 
                 var overlayInner = overlay.append("div")
                                    .attr("class", "njg-inner");
@@ -129,15 +139,19 @@
                                         .attr("class", "njg-close")
                                         .on("click", function() {
                                             connlist.attr("class", "njg-hidden");
+                                        current_h = h;
                                         svg = d3.selectAll("svg")
-                                            .attr("width", w)
-                                            .attr("height", h*0.95);
-
-                                        force.size([w, h*0.95]);
+                                            .attr("width", current_w+50)
+                                            .attr("height", current_h);
+                                        force.size([current_w, current_h]);
                                         });
 
                 // Use elliptical arc path segments to doubly-encode directionality.
                 function tick() {
+
+                    circle.attr("x", function(d) { return d.x = Math.max(20, Math.min(current_w - 50, d.x)); })
+                          .attr("y", function(d) { return d.y = Math.max(20, Math.min(current_h - 50, d.y)); });
+
                     path.attr("d", function(d) {
                         var dx = d.target.x - d.source.x,
                             dy = d.target.y - d.source.y,
@@ -193,20 +207,22 @@
                     overlay.classed("njg-hidden", false);
                     overlay.style("display", "block");
                     
+                    //var connlist_label = $ ( "div.ibox-title" ).html();
                     var connlist_label = d3.select(".ibox-title");
                     html = "<h5>" + d.name + " Links</h5>";
                     connlist_label.html(html);
-
+                    
                     connlist.attr("class", "connlist-visible");
 
-                    tab_h = document.getElementById('link_table').offsetHeight + 25;
+                    current_h = h - document.getElementById('link_table').offsetHeight + 25;
+                    current_w = w*0.8;
 
                     svg = d3.selectAll("svg")
-                            .attr("width", w)
-                            .attr("height", h-tab_h);
+                            .attr("width", current_w+50)
+                            .attr("height", current_h);
 
-                    force.size([w, h-tab_h]);
-
+                    force.size([current_w, current_h]);
+                    
                     d3.selectAll("path").attr("class", "link");
                 } 
 
