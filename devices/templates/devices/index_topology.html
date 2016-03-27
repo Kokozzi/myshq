@@ -177,7 +177,7 @@
 
                     circle.attr("transform", function(d) {
                         return "translate(" + d.x + "," + d.y + ")"; });
-                          //.classed("fixed", d.fixed = true);//
+                          //.classed("fixed", d.fixed = true);
 
                     text.attr("transform", function(d) {
                         return "translate(" + d.x + "," + d.y + ")";
@@ -214,7 +214,7 @@
                     
                     connlist.attr("class", "connlist-visible");
 
-                    current_h = h - document.getElementById('link_table').offsetHeight + 25;
+                    current_h = h - document.getElementById('link_table').offsetHeight + 15;
                     current_w = w*0.8;
 
                     svg = d3.selectAll("svg")
