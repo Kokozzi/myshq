@@ -1,0 +1,27 @@
+{
+    "nodes": [
+        { "id": 0, "name": "Zelax 1", "IpAddress": "10.30.1.1", "state": 1 },
+        { "id": 1, "name": "Zelax 2", "IpAddress": "10.20.1.1", "state": 0 },
+        { "id": 2, "name": "Zelax 3", "IpAddress": "10.31.1.1", "state": 1 },
+        { "id": 3, "name": "Router 31", "IpAddress": "10.36.2.1", "state": 1 },
+        { "id": 12, "name": "Router 3", "IpAddress": "10.31.5.1", "state": 1 },
+        { "id": 5, "name": "Router 41", "IpAddress": "10.31.5.1", "state": 0 },
+        { "id": 6, "name": "Router 5", "IpAddress": "10.31.5.1", "state": 1 },
+        { "id": 7, "name": "Brocade 1", "IpAddress": "10.31.5.1", "state": 1 },
+        { "id": 9, "name": "Brocade 2", "IpAddress": "10.31.5.1", "state": 1 }
+    ],
+    "links": [     
+        { "source": 0, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 1, "name": "Z1-Z2", "Link_found": "0", "Bandwidth": "10" },
+        { "source": 0, "port_src": "Ethernet1/0/2", "port_dst": "Ethernet1/0/2", "target": 2, "name": "Z1-Z3", "Link_found": "1", "Bandwidth": "1" },
+        { "source": 0, "port_src": "Ethernet1/0/4", "port_dst": "Ethernet1/0/3", "target": 3, "name": "Z1-R31", "Link_found": "0", "Bandwidth": "100" },
+        { "source": 1, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 2, "name": "Z2-Z3", "Link_found": "1", "Bandwidth": "15" },
+        { "source": 3, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 12, "name": "R31-R3", "Link_found": "0", "Bandwidth": "5" },
+        { "source": 3, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/2", "target": 5, "name": "R31-R41", "Link_found": "0", "Bandwidth": "25" },
+        { "source": 3, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/3", "target": 6, "name": "R31-R5", "Link_found": "1", "Bandwidth": "10" },
+        { "source": 12, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 5, "name": "R3-R41", "Link_found": "0", "Bandwidth": "5" },
+        { "source": 12, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R3-R5", "Link_found": "0", "Bandwidth": "100" },
+        { "source": 5, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R41-R5", "Link_found": "1", "Bandwidth": "1" },
+        { "source": 6, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 7, "name": "R5-B1", "Link_found": "0", "Bandwidth": "15" },
+        { "source": 7, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/5", "target": 9, "name": "B1-B2", "Link_found": "0", "Bandwidth": "10" }
+    ]
+}

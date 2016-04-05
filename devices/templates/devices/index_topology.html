@@ -20,21 +20,7 @@
             <div id="graphContainer" class="graphContainer">
             <script>
             $(function(){
-                var data = {
-                    "nodes": [
-                        {% autoescape off %}
-                        {% for device in node %}
-                        { {{ device }} },
-                        {% endfor %}
-                        
-                    ],
-                    "links": [   
-                        {% for lin in link %}  
-                        { {{ lin }} },
-                        {% endfor %}
-                        {% endautoescape %}
-                    ]
-                };          
+                var data = {{ node|safe }};
 
                 // used to store the number of links between two nodes. 
                 // mLinkNum[data.links[i].source + "," + data.links[i].target] = data.links[i].linkindex;
@@ -332,40 +318,7 @@
                     <div class="ibox-title">
                         <h5>Links </h5>
                     </div>
-                    
                     <table id="link_inf" class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th width=5%>Status</th>
-                            <th>Vendor</th>
-                            <th>Hostname</th>
-                            <th>IP Address</th>
-                            <th>Hardware</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><h4><span class="label label-primary">up</span></h4></td>
-                            <td>213</td>
-                            <td>Switch1</td>
-                            <td> 10.30.1.1 </td>
-                            <td> CISCO3560 </td>
-                        </tr>
-                        <tr>
-                            <td><h4><span class="label label-danger">down</span></h4></td>
-                            <td>111</td>
-                            <td>Jacob</td>
-                            <td> -20% </td>
-                            <td> 40% </td>
-                        </tr>
-                        <tr>
-                            <td><h4><span class="label label-primary">up</span></h4></td>
-                            <td>123</td>
-                            <td>Samantha</td>
-                            <td> 40% </td>
-                            <td> 40% </td>
-                        </tr>
-                        </tbody>
                     </table>
                     
                 </div>

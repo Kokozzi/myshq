@@ -1,6 +1,7 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect
+import json
 
 from .models import Device, SDN_Device  # , SDN_Port
 from .forms import AddDeviceForm
@@ -37,57 +38,52 @@ def base_page_view(request):
 
 
 def topology_view(request):
-    nodes = SDN_Device.objects.all()
     id_dict = dict()
-    node_array = list()
-    # link_array = list()
-    image = ("../../static/img/switch.svg",
-             "../../static/img/switch-d.svg", "../../static/img/switch.svg")
+
+    with open("/home/tsibulya/sdn/devices/topo_real.json") as json_file:
+        json_data = json.load(json_file)
+
+    temp_arr = list()
+
+    for node in json_data["nodes"]:
+        node["name"] = node["id"]
+        node["status"] = 1
+        for link in node['l']:
+            if link["t"] == "U":
+                add = True
+                for element in temp_arr:
+                    if (element["source"] == link["N"] and
+                       element["target"] == node["id"]):
+                            add = False
+                if add:
+                    temp_dict = dict()
+                    temp_dict["source"] = node["id"]
+                    temp_dict["target"] = link["N"]
+                    temp_dict["port_src"] = link["P1"]
+                    temp_dict["port_dst"] = link["P2"]
+                    temp_dict["status"] = link["ST"]
+                    temp_dict["Bandwidth"] = link["BW"]
+                    temp_arr.append(temp_dict)
+        node.pop('l')
+
+    json_data.update({'links': temp_arr})
+
     ind = 0
-    for dev in nodes:
-        id_dict = {str(dev.id): ind}
-        node_array.append('"id": ' + str(ind) + ', \
-                      "name": "' + str(dev.hostname) + '", \
-                      "icon": "' + str(image[ind]) + '", \
-                      "IpAddress": "' + str(dev.ip) + '", \
-                      "ip_conn": "' + str(dev.ip_conn) + '", \
-                      "port": ' + str(dev.port) + ', \
-                      "hw_address": "' + str(dev.hw_address) + '", \
-                      "company": "' + str(dev.company) + '", \
-                      "device_type": "' + str(dev.device_type) + '", \
-                      "protocol_vers": "' + str(dev.protocol_vers) + '", \
-                      "serial": "' + str(dev.serial) + '"')
+    for nodes in json_data['nodes']:
+        id_dict[nodes['id']] = ind
+        nodes['id'] = ind
+        if nodes['status'] == 1:
+            nodes['icon'] = "../../static/img/switch.svg"
+        else:
+            nodes['icon'] = "../../static/img/switch-d.svg"
         ind += 1
-    """
-    for dev in nodes:
-        link_array.append('"source": ' + str(id_dict[dev.id]) + ', \
-                            "target": ' + str[id_dict[dev.id]] + '')
 
+    for link in json_data['links']:
+        link['source'] = id_dict[link['source']]
+        link['target'] = id_dict[link['target']]
 
-    node = ('"id": 0, "name": "YYYY", "icon": "../../static/img/switch.svg", \
-             "IpAddress": "10.30.1.1"',
-            '"id": 1, "name": "ZZZZ", "icon": "../../static/img/router.svg", \
-            "IpAddress": "10.20.1.1"',
-        '"id": 2, "name": "Router 2", "icon": "../../static/img/router.svg", \
-            "IpAddress": "10.31.1.1"',
-        '"id": 3, "name": "Switch 2", "icon": "../../static/img/switch.svg", \
-            "IpAddress": "10.36.2.1"',
-        '"id": 4, "name": "Switch 3", "icon": "../../static/img/switch.svg", \
-            "IpAddress": "10.31.5.1"')
-
-    link = ('"source": 1, "target": 2, "name": "A-B"',
-            '"source": 1, "target": 6, "name": "A-C-1"',
-            '"source": 1, "target": 6, "name": "A-C-2"',
-            '"source": 2, "target": 6, "name": "A-F-2"')
-    """
-    link = ('"source": 0, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", \
-        "target": 1, "name": "Z1-Z2", "Link_found": "0", "Bandwidth": "10"',
-            '"source": 0, "port_src": "Ethernet1/0/2", "port_dst": "Ethernet1/0/2", \
-        "target": 2, "name": "Z1-Z3", "Link_found": "1", "Bandwidth": "1"',
-            '"source": 1, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", \
-        "target": 2, "name": "Z2-Z3", "Link_found": "1", "Bandwidth": "15"')
-    context = {'node': node_array, 'link': link, 'devices': nodes}
-    return render(request, 'devices/index_topology.html', context)
+    # context = {'node': json_data, 'devices': nodes}
+    return render(request, 'devices/index_topology.html', {'node': json_data})
 
 
 def add_device(request):
