@@ -1,0 +1,27 @@
+[  349.498563] 
+5678099  5
+[  350.043752] BVN  SENDING MSG 
+
+[  350.046485] BVN  SENDING MSG size: 2130
+
+[  350.069880] ------------[ cut here ]------------
+[  350.071680] WARNING: CPU: 0 PID: 1327 at /build/linux-ELRFVQ/linux-3.16.7-ckt11/net/netlink/af_netlink.c:908 netlink_sock_destruct+0x112/0x130()
+[  350.071680] Modules linked in: mdispatcher(O) vsms2(O) mirsev(O) nfsd auth_rpcgss oid_registry nfs_acl nfs lockd fscache sunrpc crc32_pclmul ghash_clmulni_intel aesni_intel aes_x86_64 lrw gf128mul joydev glue_helper ablk_helper cryptd pcspkr evdev snd_intel8x0 snd_ac97_codec i2c_piix4 psmouse i2c_core serio_raw snd_pcm snd_timer battery snd soundcore ac97_bus ac video button processor thermal_sys parport_pc ppdev lp parport autofs4 ext4 crc16 mbcache jbd2 dm_mod hid_generic usbhid hid sg sd_mod crc_t10dif sr_mod cdrom crct10dif_generic ata_generic crct10dif_pclmul crct10dif_common crc32c_intel ohci_pci ehci_pci ohci_hcd ehci_hcd ata_piix ahci libahci usbcore usb_common e1000 libata scsi_mod
+[  350.077457] CPU: 0 PID: 1327 Comm: python Tainted: G      D    O  3.16.0-4-amd64 #1 Debian 3.16.7-ckt11-1+deb8u3
+[  350.078120] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[  350.078600]  0000000000000009 ffffffff8150b3a5 0000000000000000 ffffffff81067767
+[  350.079033]  ffff88003b932000 ffff88003ceb0840 ffff88003b932198 ffff88003e1b8560
+[  350.079455]  ffff88003c111e58 ffffffff81448282 0000000000000000 0000000000000000
+[  350.079848] Call Trace:
+[  350.080269]  [<ffffffff8150b3a5>] ? dump_stack+0x41/0x51
+[  350.080695]  [<ffffffff81067767>] ? warn_slowpath_common+0x77/0x90
+[  350.081117]  [<ffffffff81448282>] ? netlink_sock_destruct+0x112/0x130
+[  350.081540]  [<ffffffff8140821a>] ? __sk_free+0x1a/0x130
+[  350.081952]  [<ffffffff81449e78>] ? netlink_release+0x2a8/0x320
+[  350.082333]  [<ffffffff8140324a>] ? sock_release+0x1a/0x90
+[  350.082624]  [<ffffffff814032ce>] ? sock_close+0xe/0x20
+[  350.083035]  [<ffffffff811a9b8a>] ? __fput+0xca/0x1d0
+[  350.083443]  [<ffffffff810851a7>] ? task_work_run+0x97/0xd0
+[  350.083860]  [<ffffffff81012e99>] ? do_notify_resume+0x69/0xa0
+[  350.084260]  [<ffffffff8151184a>] ? int_signal+0x12/0x17
+[  350.084646] ---[ end trace 9a5d85764b9f2759 ]---

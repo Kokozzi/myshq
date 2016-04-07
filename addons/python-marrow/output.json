@@ -1,0 +1,26 @@
+{ 
+    nodes: [{ 
+        id: 83917578,
+        type: 0, 
+        links_count: 6, 
+        links: [    { 
+                    type: 'linedown', 
+                    node: 50363146, 
+                    bandwidth: 0, 
+                    state: 1
+                    },
+                    { 
+                    type: 'lineup', 
+                    node: 50363146, 
+                    bandwidth: 0, 
+                    state: 1
+                    },
+                    { 
+                        type: 'linedown', 
+                        node: 687897354, 
+                        bandwidth: 0, 
+                        state: 1
+                    },{ type: 'lineup', node: 687897354, bandwidth: 0, state: 1},{ type: 'linedown', node: 520125194, bandwidth: 0, state: 1},{ type: 'lineup', node: 520125194, bandwidth: 0, state: 1},]},{ id: 687897354,type: 0, links_count: 6, links: [
+{ type: 'linedown', node: 50363146, bandwidth: 0, state: 1},{ type: 'lineup', node: 50363146, bandwidth: 0, state: 1},{ type: 'lineup', node: 520125194, bandwidth: 0, state: 1},{ type: 'linedown', node: 520125194, bandwidth: 0, state: 1},{ type: 'lineup', node: 83917578, bandwidth: 0, state: 1},{ type: 'linedown', node: 83917578, bandwidth: 0, state: 1},]},{ id: 520125194,type: 0, links_count: 6, links: [
+{ type: 'linedown', node: 50363146, bandwidth: 0, state: 1},{ type: 'lineup', node: 50363146, bandwidth: 0, state: 1},{ type: 'linedown', node: 687897354, bandwidth: 0, state: 1},{ type: 'lineup', node: 687897354, bandwidth: 0, state: 1},{ type: 'lineup', node: 83917578, bandwidth: 0, state: 1},{ type: 'linedown', node: 83917578, bandwidth: 0, state: 1},]},{ id: 50363146,type: 0, links_count: 6, links: [
+{ type: 'lineup', node: 83917578, bandwidth: 0, state: 1},{ type: 'linedown', node: 83917578, bandwidth: 0, state: 1},{ type: 'lineup', node: 687897354, bandwidth: 0, state: 1},{ type: 'linedown', node: 687897354, bandwidth: 0, state: 1},{ type: 'lineup', node: 520125194, bandwidth: 0, state: 1},{ type: 'linedown', node: 520125194, bandwidth: 0, state: 1},]},]}
