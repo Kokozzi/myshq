@@ -86,6 +86,10 @@ def topology_view(request):
     return render(request, 'devices/index_topology.html', {'node': json_data})
 
 
+def service_add_view(request):
+    return render(request, 'devices/index_service_add.html')
+
+
 def add_device(request):
     if request.method == "POST":
         form = AddDeviceForm(request.POST)

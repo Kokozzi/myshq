@@ -5,6 +5,7 @@ app_name = 'devices'
 urlpatterns = [
     url(r'^$', base_page_view, name='base'),
     url(r'^topology/$', topology_view, name='topology'),
+    url(r'^service_add/$', service_add_view, name='service_add'),
     url(r'^add/$', add_device, name='add'),
     url(r'^list/$', DeviceListView.as_view(), name='device_list'),
     url(r'^legacy_detail/(?P<pk>[0-9]+)/$',

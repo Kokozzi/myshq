@@ -1,0 +1,271 @@
+{% extends "devices/index.html" %}
+{% load staticfiles %}
+
+"{% static 'css/bootstrap.min.css' %}"
+{% block css_service_add %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+
+<link href="{% static 'css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/steps/jquery.steps.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/select2/select2.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+
+<link href="{% static 'css/animate.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/topology.css' %}" rel="stylesheet">
+<style>
+    .wrapper-content {
+      padding: 5px 5px 5px;
+    }
+    
+    .wizard > .content > .body {
+        position: relative; 
+    }
+</style>
+{% endblock css_service_add %}
+
+{% block active_service_add %}<li class="active">{% endblock active_service_add %}
+
+{% block service_add %}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div id="graphContainer" class="graphContainer"></div>          
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                	    <h3 id="name_header">
+                            Добавление нового сервиса
+                        </h3>
+            <form id="form" action="#" class="wizard-big">
+                <h1>Название</h1>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><h3>Название сервиса</h3></label>
+                                <input id="serviceName" name="serviceName" type="text" class="form-control required" title="Необходимо название">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <h1>Выбор узлов доступа</h1>
+                <fieldset>        
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label><h3 id="select_device">Выберите узел на топологии</h3></label>
+                            <div class="panel-body" style="padding: 0px;">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title">
+                                                <a id="coll_one" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Выбрать физический порт</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                           
+                                    <div class="col-sm-10"><select id="port_select" class="form-control m-b" name="account">
+                                        <option></option>
+                                    </select>
+                                    </div>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Выбрать IP адрес</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <div class="col-sm-10"><input id="ip_input" type="text" class="form-control"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Выбрать TCP/UDP порт</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                            <div class="col-sm-5"><input id="udp_port_input" type="number" class="form-control"></div>
+                                            <div class="radio radio radio-inline" style="margin-top:10px;">
+                                                <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
+                                                <label for="inlineRadio1"> TCP </label>
+                                            </div>
+                                            <div class="radio radio radio-inline" style="margin-top:10px;">
+                                                <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                                                <label for="inlineRadio2"> UDP </label>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="device_add" class="btn btn-primary " type="button"><i class="fa fa-check"></i>&nbsp;Добавить</button>
+                </div>
+                <div class="col-lg-6">
+                    <label id="select_device2"><h3 id="device_count">Всего добавлено узлов: 0</h3></label>
+                    <div class="panel panel-default">
+                                <table id="all_dev_table" class="table table-bordered" style="margin-bottom: 0px;">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Узел </th>
+                                        <th>Физический порт </th>
+                                        <th>IP адрес</th>
+                                        <th>TCP/UDP порт</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    <button id="dev_delete" class="btn btn-danger " type="button"><i class="fa fa-trash"></i>&nbsp;Удалить</button>
+                    </div>
+                </div>
+                </fieldset>
+
+                <h1>Требования к сервису</h1>
+                <fieldset>
+                <div class="row">
+                    <div class="col-lg-6">
+                       <label><h3>Требования к маршруту прохождения трафика</h3></label>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                       <div class="panel panel-default">
+                                       <div class="panel-heading">
+                                            <i class="fa fa-info-circle"></i> Обязательные узлы
+                                        </div>
+                                        <select id="node_list" class="select2_demo_2 form-control" multiple="multiple">
+                                        </select>
+                                        </div>
+                                        <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <i class="fa fa-info-circle"></i> Обязательные линки
+                                        </div>
+                                        <select id="link_list" class="select2_demo_2 form-control" multiple="multiple">
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        <button id="node_add" class="btn btn-primary " type="button"><i class="fa fa-check"></i>&nbsp;Добавить</button> 
+                    </div>
+                    <div class="col-lg-6">
+                       <label><h3>Требования к качеству сервиса</h3></label>
+                       <div class="panel-body" style="padding: 0px;">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Полоса пропускания</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                            <div class="col-sm-6"><input id="bw_input" type="number" class="form-control"></div>
+                                           <label style="margin-bottom: 0px; margin-top: 10px;">Kbit/s</label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="ibox-title back-change hidden"></div>
+                </fieldset>
+            </form>
+        		</div>
+   			</div>
+    	</div>
+    </div>
+</div>
+{% endblock service_add %}
+
+
+{% block service_add_scripts %}
+<script>
+    var data = {
+        "nodes": [
+            { "id": 0, "name": "Zelax 1", "icon": "../../static/img/switch.svg", "IpAddress": "10.30.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]},
+            { "id": 1, "name": "Zelax 2", "icon": "../../static/img/switch.svg", "IpAddress": "10.20.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/19", "name2": 2}]},
+            { "id": 2, "name": "Zelax 3", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/29", "name2": 2}]},
+            { "id": 3, "name": "Router 31", "icon": "../../static/img/router.svg", "IpAddress": "10.36.2.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/39", "name2": 2}]},
+            { "id": 4, "name": "Router 3", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/2", "name2": 2}, {"name": "Ethernet1/0/9", "name2": 2}] },
+            { "id": 5, "name": "Router 41", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/1", "name2": 2}, {"name": "Ethernet1/0/3", "name2": 2}]},
+            { "id": 6, "name": "Router 5", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/3", "name2": 2}, {"name": "Ethernet1/0/19", "name2": 2}]},
+            { "id": 7, "name": "Brocade 1", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/5", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]},
+            { "id": 8, "name": "Brocade 2", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/5", "name2": 2}, {"name": "Ethernet1/0/8", "name2": 2}, {"name": "Ethernet1/0/54", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]}
+        ],
+        "links": [
+            { "source": 0, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 1, "name": "Z1-Z2", "Link_found": "0", "Bandwidth": "10" },
+            { "source": 0, "port_src": "Ethernet1/0/2", "port_dst": "Ethernet1/0/2", "target": 2, "name": "Z1-Z3", "Link_found": "1", "Bandwidth": "1" },
+            { "source": 0, "port_src": "Ethernet1/0/4", "port_dst": "Ethernet1/0/3", "target": 3, "name": "Z1-R31", "Link_found": "0", "Bandwidth": "100" },
+            { "source": 1, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 2, "name": "Z2-Z3", "Link_found": "1", "Bandwidth": "15" },
+            { "source": 3, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 4, "name": "R31-R3", "Link_found": "0", "Bandwidth": "5" },
+            { "source": 3, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/2", "target": 5, "name": "R31-R41", "Link_found": "0", "Bandwidth": "25" },
+            { "source": 3, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/3", "target": 6, "name": "R31-R5", "Link_found": "1", "Bandwidth": "10" },
+            { "source": 4, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 5, "name": "R3-R41", "Link_found": "0", "Bandwidth": "5" },
+            { "source": 4, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R3-R5", "Link_found": "0", "Bandwidth": "100" },
+            { "source": 5, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R41-R5", "Link_found": "1", "Bandwidth": "1" },
+            { "source": 6, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 7, "name": "R5-B1", "Link_found": "0", "Bandwidth": "15" },
+            { "source": 7, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/5", "target": 8, "name": "B1-B2", "Link_found": "0", "Bandwidth": "10" }
+        ]
+    };
+    var result = {};
+        
+</script>
+    
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'js/inspinia.js' %}"></script>
+    <script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
+    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    
+    <!-- Chosen -->
+    <script src="{% static 'js/plugins/chosen/chosen.jquery.js' %}"></script>
+    
+    <!-- iCheck -->
+    <script src="{% static 'js/plugins/iCheck/icheck.min.js' %}"></script>
+    
+    <!-- MENU -->
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+
+    <!-- Select2 -->
+    <script src="{% static 'js/plugins/select2/select2.full.min.js' %}"></script>
+    
+    <!-- Topology script -->
+    <script src="{% static 'js/d3.min.js' %}"></script>
+    <script src="{% static 'js/my.js' %}"></script>
+    
+    <!-- Steps -->
+    <script src="{% static 'js/plugins/steps/jquery.steps.min.js' %}"></script>
+    
+    <!-- Jquery Validate -->
+    <script src="{% static 'js/plugins/validate/jquery.validate.min.js' %}"></script>
+    
+    <!-- Toastr events plugin -->
+    <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
+
+    <!-- Form Wizard interaction script -->
+    <script src="{% static 'js/form.js' %}"></script>
+    
+    <!-- Wizard interaction script -->
+    <script src="{% static 'js/services.js' %}"></script>
+{% endblock service_add_scripts %}
