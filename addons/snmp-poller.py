@@ -47,7 +47,7 @@ def device_polling(device, comm):
 
     return sysname[0].value, location[0].value, uptime[0].value, hardware.value, serial.value, os, icon
 
-conn = sqlite3.connect('db.sqlite3')
+conn = sqlite3.connect('/home/tsibulya/sdn/db.sqlite3')
 cursor = conn.cursor()
 cursor.execute("SELECT id, ip, community FROM devices_device")
 data = cursor.fetchall()

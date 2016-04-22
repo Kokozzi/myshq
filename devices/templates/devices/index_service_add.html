@@ -1,7 +1,6 @@
 {% extends "devices/index.html" %}
 {% load staticfiles %}
 
-"{% static 'css/bootstrap.min.css' %}"
 {% block css_service_add %}
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
@@ -11,6 +10,7 @@
 <link href="{% static 'css/plugins/steps/jquery.steps.css' %}" rel="stylesheet">
 <link href="{% static 'css/plugins/select2/select2.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/sweetalert/sweetalert.css' %}" rel="stylesheet">
 
 <link href="{% static 'css/animate.css' %}" rel="stylesheet">
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -198,35 +198,10 @@
 
 {% block service_add_scripts %}
 <script>
-    var data = {
-        "nodes": [
-            { "id": 0, "name": "Zelax 1", "icon": "../../static/img/switch.svg", "IpAddress": "10.30.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]},
-            { "id": 1, "name": "Zelax 2", "icon": "../../static/img/switch.svg", "IpAddress": "10.20.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/19", "name2": 2}]},
-            { "id": 2, "name": "Zelax 3", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.1.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/29", "name2": 2}]},
-            { "id": 3, "name": "Router 31", "icon": "../../static/img/router.svg", "IpAddress": "10.36.2.1", "Ports": [{"name": "Ethernet1/0/9", "name2": 2}, {"name": "Ethernet1/0/39", "name2": 2}]},
-            { "id": 4, "name": "Router 3", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/2", "name2": 2}, {"name": "Ethernet1/0/9", "name2": 2}] },
-            { "id": 5, "name": "Router 41", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/1", "name2": 2}, {"name": "Ethernet1/0/3", "name2": 2}]},
-            { "id": 6, "name": "Router 5", "icon": "../../static/img/router.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/3", "name2": 2}, {"name": "Ethernet1/0/19", "name2": 2}]},
-            { "id": 7, "name": "Brocade 1", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/5", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]},
-            { "id": 8, "name": "Brocade 2", "icon": "../../static/img/switch.svg", "IpAddress": "10.31.5.1", "Ports": [{"name": "Ethernet1/0/5", "name2": 2}, {"name": "Ethernet1/0/8", "name2": 2}, {"name": "Ethernet1/0/54", "name2": 2}, {"name": "Ethernet1/0/1", "name2": 2}]}
-        ],
-        "links": [
-            { "source": 0, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 1, "name": "Z1-Z2", "Link_found": "0", "Bandwidth": "10" },
-            { "source": 0, "port_src": "Ethernet1/0/2", "port_dst": "Ethernet1/0/2", "target": 2, "name": "Z1-Z3", "Link_found": "1", "Bandwidth": "1" },
-            { "source": 0, "port_src": "Ethernet1/0/4", "port_dst": "Ethernet1/0/3", "target": 3, "name": "Z1-R31", "Link_found": "0", "Bandwidth": "100" },
-            { "source": 1, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 2, "name": "Z2-Z3", "Link_found": "1", "Bandwidth": "15" },
-            { "source": 3, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 4, "name": "R31-R3", "Link_found": "0", "Bandwidth": "5" },
-            { "source": 3, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/2", "target": 5, "name": "R31-R41", "Link_found": "0", "Bandwidth": "25" },
-            { "source": 3, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/3", "target": 6, "name": "R31-R5", "Link_found": "1", "Bandwidth": "10" },
-            { "source": 4, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 5, "name": "R3-R41", "Link_found": "0", "Bandwidth": "5" },
-            { "source": 4, "port_src": "Ethernet1/0/5", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R3-R5", "Link_found": "0", "Bandwidth": "100" },
-            { "source": 5, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 6, "name": "R41-R5", "Link_found": "1", "Bandwidth": "1" },
-            { "source": 6, "port_src": "Ethernet1/0/3", "port_dst": "Ethernet1/0/1", "target": 7, "name": "R5-B1", "Link_found": "0", "Bandwidth": "15" },
-            { "source": 7, "port_src": "Ethernet1/0/1", "port_dst": "Ethernet1/0/5", "target": 8, "name": "B1-B2", "Link_found": "0", "Bandwidth": "10" }
-        ]
-    };
+    var data = {{ node|safe }};
     var result = {};
-        
+    var URL = "{% url 'devices:service_add' %}"
+    var service_URL = "/devices/service/"
 </script>
     
     <!-- Mainly scripts -->
@@ -262,6 +237,9 @@
     
     <!-- Toastr events plugin -->
     <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
+
+    <!-- Toastr events plugin -->
+    <script src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
 
     <!-- Form Wizard interaction script -->
     <script src="{% static 'js/form.js' %}"></script>

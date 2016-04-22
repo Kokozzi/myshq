@@ -111,10 +111,12 @@ $(document).ready(function(){
         onFinished: function (event, currentIndex)
         {
             var table = $("#all_dev_table tbody")[0],
-                i = 1;
+                i = 1,
+                result = {};
 
             result["name"] = $("#serviceName").val();
             result["nodes"] = [];
+            var node_count = 0;
             for (i = 1; i < table.rows.length; i += 1) {
                 var node = {};
                 node["name"] = table.rows[i].cells[1].innerHTML;
@@ -134,7 +136,9 @@ $(document).ready(function(){
                     node["port"] = table.rows[i].cells[4].innerHTML;
                 }
                 result["nodes"].push(node);
+                node_count += 1;
             }
+            result["count"] = node_count;
             result["bw"] = $("#bw_input").val();
             result["req_nodes"] = [];
             result["req_links"] = [];
@@ -148,6 +152,50 @@ $(document).ready(function(){
             });
             
             console.log(result);
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            $.post(URL, result, function (response) {
+                /*response["path"]*/
+                if (response["text"] === 'success') {
+                    swal({
+                        title: "Сервис успешно добавлен!",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#6FD1BD",
+                        confirmButtonText: "Посмотреть",
+                        cancelButtonText: "Добавить еще",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) { 
+                            location.href = service_URL + response["name"];
+                        } else { 
+                            location.href = URL;
+                        }
+                    }
+                    );
+                    /*toastr.success('Сервис добавлен', 'Успешно!');*/
+                } else {
+                    toastr.error('Проблемы при добавлении сервиса', 'Произошла ошибка!');
+                }
+            });
         }
     }).validate({
                 errorPlacement: function (error, element)

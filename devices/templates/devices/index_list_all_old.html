@@ -24,8 +24,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% if node_legacy %}
-	                            {% for device in node_legacy %}
+                            {% if object_list %}
+	                            {% for device in object_list %}
 	                            <tr>
 	                                {% if device.status == 1 %}
 	                                	<td><h4><span class="label label-primary">up</span></h4></td>
@@ -74,8 +74,8 @@
                             </tr>
                             </thead>
                             <tbody>
-							{% if node_sdn %}
-	                            {% for sd in node_sdn.Switches %}
+							{% if object_list %}
+	                            {% for sd in sdn %}
 		                            
 		                            <tr>
 		                                {% if sd.status == 1 %}
@@ -87,7 +87,8 @@
 		                                {% endif %}
 
 		                                <td>{{ sd.device_type }}</td>
-		                                <td><a href="{% url 'devices:sdn_detail' sd.datapathid %}">{{ sd.hostname }}</a></td> 
+		                                <td><a href="{% url 'devices:sdn_detail' 113833410564 %}">{{ sd.hostname }}</a></td> 
+                                        <!--<td><a href="http://10.30.1.56:8000/devices/sdn_detail/113833410564/">{{ sd.hostname }}</a></td>-->
 		                                <td> {{ sd.ip }} </td>
 		                                <td> {{ sd.protocol_vers }} </td>
 		                            </tr>

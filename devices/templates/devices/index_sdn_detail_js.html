@@ -5,7 +5,6 @@
 
 {% block sdn_detail %}
         <div class="wrapper wrapper-content animated fadeInRight">
-        {% if node.nodes != "no data" %}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -13,7 +12,6 @@
                             <tbody>
                             <tr>
 	                            <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
-                                <td><h3>{{ node.name }}</h3>{{ node.TypeOfSwitch }}<br>{{ node.IpAddress }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -32,55 +30,55 @@
                             <tbody>
 								<tr>
 									<th scope="row">Vendor</th>
-									<td id="company">{{ node.CompanyName }}</td>
+									<td id="company">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Protocol Version</th>
-									<td id="protocol_vers">{{ node.ProtocolVersion }}</td>
+									<td id="protocol_vers">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Connection IP Address</th>
-									<td id="ip_conn">{{ node.IpAddressConn }}</td>
+									<td id="ip_conn">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Port Number</th>
-									<td id="port">{{ node.portNumber }}</td>
+									<td id="port">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Hardware Address</th>
-									<td id="hw_address">{{ node.hardwareAddress }}</td>
+									<td id="hw_address">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Connection Start Date</th>
-									<td id="date_start_conn">{{ node.DateStartConn }}</td>
+									<td id="date_start_conn">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Connection Start Time</th>
-									<td id="time_start_conn">{{ node.TimeStartConn }}</td>
+									<td id="time_start_conn">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Serial Number</th>
-									<td id="serial">{{ node.SN }}</td>
+									<td id="serial">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Config</th>
-									<td id="config">{{ node.config }}</td>
+									<td id="config">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Current Features</th>
-									<td id="curr_features">{{ node.currentFeatures }}</td>
+									<td id="curr_features">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Advertised Features</th>
-									<td id="advert_features">{{ node.advertisedFeatures }}</td>
+									<td id="advert_features">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Supported Features</th>
-									<td id="supp_features">{{ node.supportedFeatures }}</td>
+									<td id="supp_features">No data</td>
 								</tr>
 								<tr>
 									<th scope="row">Peer Features</th>
-									<td id="peer_features">{{ node.peerFeatures }}</td>
+									<td id="peer_features">No data</td>
 								</tr>
                             </tbody>
                         </table>
@@ -110,22 +108,7 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            {% for port in node.Ports %}
-                                {% if port.connection_status == "up" %}
-                                    <tr><th><h4><span class="label label-primary">{{ port.name }}</span></h4></th>
-                                {% else %}
-                                    <tr><th><h4><span class="label label-danger">{{ port.name }}</span></h4></th>
-                                {% endif %}
-                                <td>{{ port.hw_addr }}</td>
-                                <td>{{ port.TxB }}</td>
-                                <td>{{ port.RxB }}</td>
-                                <td>{{ port.TxP }}</td>
-                                <td>{{ port.RxP }}</td>
-                                <td>{{ port.Dropped }}</td>
-                                <td>{{ port.Error }}</td>
-                            {% endfor %}
-
+                            <tr></tr>
                             </tbody>
                         </table>
                     </div>
@@ -133,43 +116,16 @@
                 </div>
                 </div>
             </div>
-
-            {% else %}
-
-                <script>
-                var msg = "Недоступны данные об устройстве",
-                    title = "Ошибка!";
-                </script>
-
-            {% endif %}
-
         </div>
 {% endblock sdn_detail %}
 
 {% block sdn_detail_scripts %}
+<script>
+var data = {{ node|safe }};
+</script>
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
 <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
-<script>
-    if (msg === "Недоступны данные об устройстве" && title === "Ошибка!") {
-        toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "progressBar": true,
-                "preventDuplicates": false,
-                "positionClass": "toast-top-right",
-                "onclick": null,
-                "showDuration": "400",
-                "hideDuration": "1000",
-                "timeOut": "7000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-        toastr.error(msg, title);
-    }
-</script>
+<script src="{% static 'js/sdn_detail.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
 <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>

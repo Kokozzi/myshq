@@ -1,0 +1,52 @@
+{
+"Switches":[ 
+{ "name": "Switch1",		"DatapathId": "113833460647",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.91",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",		"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Nicra, Inc.",		"TypeOfSwitch": "Open vSwitch",                "ProtocolVersion": "10",		"SN": "None",		"config": "config",		"state": "up/down",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",		"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/3","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/4","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/5","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/6","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/7","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/8","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/9","hw_addr": "00:1a:81:00:c3:a7","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/10","hw_addr": "00:1a:81:00:c3:a7","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/11","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/12","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/13","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/14","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/15","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/16","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/17","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/18","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/19","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/20","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/21","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/22","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/23","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/25","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/26","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/27","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/28","hw_addr": "00:1a:81:00:c3:a7","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"}] 
+},
+{ "name": "Switch2",		"DatapathId": "113833410564",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.63",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",		"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Nicra, Inc.",		"TypeOfSwitch": "Open vSwitch",                "ProtocolVersion": "10",		"SN": "None",		"config": "config",		"state": "up/down",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",		"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9","hw_addr": "00:1a:81:00:00:04","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/10","hw_addr": "00:1a:81:00:00:04","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/11","hw_addr": "00:1a:81:00:00:04","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/12","hw_addr": "00:1a:81:00:00:04","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"}] 
+},
+{ "name": "Switch3",		"DatapathId": "113833460651",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.62",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",		"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Nicra, Inc.",		"TypeOfSwitch": "Open vSwitch",                "ProtocolVersion": "10",		"SN": "None",		"config": "config",		"state": "up/down",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",		"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9","hw_addr": "00:1a:81:00:c3:ab","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/10","hw_addr": "00:1a:81:00:c3:ab","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/11","hw_addr": "00:1a:81:00:c3:ab","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"},
+{"name": "Ethernet1/0/12","hw_addr": "00:1a:81:00:c3:ab","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"}] 
+},
+{ "name": "Switch4",		"DatapathId": "113833460649",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.61",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",		"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Nicra, Inc.",		"TypeOfSwitch": "Open vSwitch",                "ProtocolVersion": "10",		"SN": "None",		"config": "config",		"state": "up/down",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",		"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9","hw_addr": "00:1a:81:00:c3:a9","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/10","hw_addr": "00:1a:81:00:c3:a9","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/11","hw_addr": "00:1a:81:00:c3:a9","connection_status": "up","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0","Error": "Error"},
+{"name": "Ethernet1/0/12","hw_addr": "00:1a:81:00:c3:a9","connection_status": "down","TxB": "0","RxB": "0","TxP": "0","RxP": "0","Dropped": "0", "Error": "Error"}] 
+}], 
+"Links":[
+{"port_src": "Ethernet1/0/11",		       "port_dst": "Ethernet1/0/10",		       "switch_src": "113833410564",		       "switch_dst": "113833460651",		       "link_found": "1",		       "state": "1",		       "bandwidth": "0"},
+{"port_src": "Ethernet1/0/9",		       "port_dst": "Ethernet1/0/11",		       "switch_src": "113833410564",		       "switch_dst": "113833460649",		       "link_found": "1",		       "state": "1",		       "bandwidth": "0"},
+{"port_src": "Ethernet1/0/9",		       "port_dst": "Ethernet1/0/9",		       "switch_src": "113833460649",		       "switch_dst": "113833460651",		       "link_found": "1",		       "state": "1",		       "bandwidth": "0"}] 
+}
