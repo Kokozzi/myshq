@@ -1,0 +1,73 @@
+{% extends "devices/index.html" %}
+{% load staticfiles %}
+
+{% block css_service_add %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/sweetalert/sweetalert.css' %}" rel="stylesheet">
+<link href="{% static 'css/animate.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock css_service_add %}
+
+{% block active_service_add %}<li class="active">{% endblock active_service_add %}
+
+{% block list_all %}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Список активных сервисов </h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-striped">
+                            {% if services %}
+                            <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Узел доступа 1</th>
+                                <th>Клиентский порт</th>
+                                <th>Узел доступа 2</th>
+                                <th>Клиентский порт</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+	                            {% for service in services.services %}
+	                            <tr>
+                                    <td><a href="{% url 'devices:service_detail' service.name %}">{{ service.name }}</a></td>
+                                    {% for node in service.nodes %}
+                                        <td>{{ node.name }}</td>
+                                        <td>Ethernet1/0/{{node.physical}}</td>
+                                    {% endfor %}
+                                    <td><button class="btn btn-danger" type="button"><i class="fa fa-trash"></i>&nbsp;Удалить</button></td>
+	                            </tr>
+	                            {% endfor %}
+	                        {% else %}
+	                        	<tr>Нет активных сервисов</tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+{% endblock list_all %}
+
+{% block sdn_detail_scripts %}
+<script>
+    var URL = "{% url 'devices:service_list' %}"
+</script>
+<!-- Mainly scripts -->
+<script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+<script src="{% static 'js/service_list.js' %}"></script>
+<script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{% static 'js/inspinia.js' %}"></script>
+<script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
+{% endblock sdn_detail_scripts %}

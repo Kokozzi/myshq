@@ -10,7 +10,19 @@ path.active_link {
     stroke: rgba(216, 179, 80, 0.8);
     stroke-width: 5px;
     cursor: pointer;
-}	
+}
+
+path.service_link {
+    fill: none;
+    stroke: rgb(23, 160, 33);
+    stroke-width: 5px;
+}
+
+path.down_link {
+    fill: none;
+    stroke: rgb(160, 23, 23);
+    stroke-width: 5px;
+}
 
 text {
     font: 10px sans-serif;

@@ -35,7 +35,7 @@ sortLinks();
 setLinkIndexAndNum();
 
 var w = document.getElementById('page-wrapper').offsetWidth - 40,
-    h = document.documentElement.clientHeight*0.80;
+    h = document.documentElement.clientHeight*0.75;
 var force = d3.layout.force()
               .size([w, h])
               .linkDistance(250)
@@ -103,22 +103,6 @@ var closeOverlay = overlay.append("a")
 var overlayInner = overlay.append("div")
                    .attr("class", "njg-inner");
 
-// Connections List (bottom table)
-
-var connlist = d3.select(".col-lg-12")
-                 .attr("class", "njg-hidden")
-
-var closeConnlist = d3.select(".panel")
-                        .append("a")
-                        .attr("class", "njg-close")
-                        .on("click", function() {
-                            connlist.attr("class", "njg-hidden");
-                        current_h = h;
-                        svg = d3.selectAll("svg")
-                            .attr("width", current_w+50)
-                            .attr("height", current_h);
-                        force.size([current_w, current_h]);
-                        });
 
 function OnClickNode(d) {
     var overlay = d3.select(".njg-overlay"),
@@ -149,34 +133,6 @@ function OnClickNode(d) {
 } 
 
 function onClickLink(d) {
-    d3.selectAll("text")
-        .style("font-size", 12)
-        .style("font-weight", "normal");
-    
-    d3.selectAll("path").attr("class", "link");
-    d3.select(this).attr("class", "active_link");
-
-    overlay.classed("njg-hidden", true);
-    
-    var connlist_label = d3.select(".ibox-title");
-    var html = "<h5>Link: " + d.source.name + " - " + d.target.name + "</h5>";
-    connlist_label.html(html);
-    
-    var connlist_link = d3.select("#link_inf");
-    html = '<thead><tr><th>' + d.source.name + ' Port</th><th>' + d.target.name + ' Port</th><th>Bandwidth</th></tr></thead>';
-    html += '<tbody><tr><td>' + d.port_src + '</td><td>' + d.port_dst + '</td><td>' + d.Bandwidth + ' Mbit/s</td></tr></tbody>';
-    connlist_link.html(html);
-
-    connlist.attr("class", "connlist-visible");
-    
-    current_h = h - document.getElementById('link_table').offsetHeight + 25;
-    current_w = w*0.8;
-
-    svg = d3.selectAll("svg")
-            .attr("width", current_w+50)
-            .attr("height", current_h);
-
-    force.size([current_w, current_h]);
 }
 
 

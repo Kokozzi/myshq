@@ -98,6 +98,7 @@ def topology_generator():
                             node["Ports"] = sw["Ports"]
             else:
                 node['icon'] = "../../../static/img/router.svg"
+                node['DatapathId'] = node['name']
                 node['name'] = Int2IP(node['name'])
         else:
             if node['t'] == 1:
@@ -110,11 +111,10 @@ def topology_generator():
     for link in json_data['links']:
         link_name = ""
         for node in json_data['nodes']:
-            if ((data_flag is True) and (node["t"] == 1)):
-                if (str(link['source']) == str(node['DatapathId'])):
-                    link_name = node["name"]
-                elif (str(link['target']) == str(node['DatapathId'])):
-                    link_name = link_name + "-" + node["name"]
+            if (str(link['source']) == str(node['DatapathId'])):
+                link_name = node["name"] + link_name
+            elif (str(link['target']) == str(node['DatapathId'])):
+                link_name = link_name + "-" + node["name"]
         link['name'] = link_name
         link['source'] = id_dict[link['source']]
         link['target'] = id_dict[link['target']]
@@ -157,7 +157,7 @@ def device_list_view(request):
         sdn = dict()
         sdn.update({"Switches": temp_arr})
 
-        legacy = Device.objects.all()
+    legacy = Device.objects.all()
 
     return render(request, 'devices/index_list_all.html',
                   {'node_sdn': sdn, 'node_legacy': legacy})
@@ -207,6 +207,9 @@ def service_add_view(request):
         except (OSError, ValueError):
             return HttpResponse('fail')
         name = request.POST['name']
+        for ch in [" ", "/"]:
+            if ch in str(name):
+                str(name).replace(ch, '_')
         count = int(request.POST["count"])
         pe = list()
         i = 0
@@ -219,6 +222,7 @@ def service_add_view(request):
             node["physical"] = str(node["physical"]).split("/")[2]
             node["ip"] = request.POST['nodes[' + str(i) + '][ip]']
             node["port"] = request.POST['nodes[' + str(i) + '][port]']
+            node["name"] = str(request.POST['nodes[' + str(i) + '][name]'])
             pe.append(node)
             i += 1
 
@@ -249,8 +253,10 @@ def service_add_view(request):
             tun_dict["tun_name"] = name + "--" + str(i + 1)
             tun_dict["path_name"] = tun_dict["tun_name"]
             tun_dict["src"] = str(pe[i % modulus]["id"])
+            tun_dict["src_name"] = str(pe[i % modulus]["name"])
             tun_dict["src_port"] = str(pe[i % modulus]["physical"])
             tun_dict["dst"] = str(pe[(i + 1) % modulus]["id"])
+            tun_dict["dst_name"] = str(pe[(i + 1) % modulus]["name"])
             tun_dict["dst_port"] = str(pe[(i + 1) % modulus]["physical"])
             tunnels_array.append(tun_dict)
             i += 1
@@ -258,6 +264,7 @@ def service_add_view(request):
         service_dict.update({'tunnels': tunnels_array})
 
         # i = 0
+        # node = topology_generator()
         # for cmd in command:
         #     try:
         #         result = json.loads(check_output(['python', '/root/projects/marrow/python-marrow/test.py', '33', cmd]).decode('utf-8'))
@@ -268,7 +275,10 @@ def service_add_view(request):
         #             return HttpResponse('path_fail')
         #     path = ""
         #     for elem in result["path"]:
-        #         path += str(elem) + "-"
+        #         for n in node["nodes"]:
+        #             if (str(elem) == str(n["DatapathId"])):
+        #                 path += n["name"] + ","
+        #     path = path[0:-1]
         #     tunnels_array[i]["path"] = path
         #     i += 1
 
@@ -292,22 +302,38 @@ def service_add_view(request):
 
 def service_detail_view(request, pk):
     with open('/home/tsibulya/sdn/devices/services.json') as services_json:
+    # with open('/var/www/sdn/devices/services.json') as services_json:
         services = json.load(services_json)
         for serv in services["services"]:
             if (serv["name"] == pk):
-                path_arr = str(serv["tunnels"][0]["path"]).split('-')
-                path_arr.pop()
-                path = ""
-                for elem in path_arr:
-                    path += str(elem) + "-"
+                # path_arr = str(serv["tunnels"][0]["path"]).split('-')
+                # path_arr.pop()
+                # path = ""
+                # for elem in path_arr:
+                #     path += str(elem) + "-"
                 return render(request, 'devices/index_service_detail.html',
                               {'node': topology_generator(), 'service': serv,
-                               'path': path})
+                               'path': serv["tunnels"][0]["path"]})
     raise Http404("No such service!")
 
 
+@csrf_exempt
 def service_list_view(request):
-    return render(request, 'devices/index_sdn_detail.html')
+    if request.method == 'POST':
+        name = request.POST['name']
+        response = dict()
+        response["text"] = "success"
+        response["name"] = name
+        return JsonResponse(response)
+    else:
+        try:
+            with open('/home/tsibulya/sdn/devices/services.json') as services_json:
+            # with open('/var/www/sdn/devices/services.json') as services_json:
+                services = json.load(services_json)
+                return render(request, 'devices/index_services_list.html',
+                              {'services': services})
+        except (OSError, ValueError):
+            return render(request, 'devices/index_services_list.html')
 
 
 def add_device(request):
@@ -319,3 +345,48 @@ def add_device(request):
     else:
         form = AddDeviceForm()
     return render(request, 'devices/base_device_add.html', {'form': form})
+
+
+@csrf_exempt
+def topo_refresh(request):
+    try:
+        with open("/home/tsibulya/sdn/devices/topo_real.json") as json_file:
+        # with open("/proc/marrow/dispatcher/topology") as json_file:
+            links_data = json.load(json_file)
+        with open("/home/tsibulya/sdn/devices/device_real2.json") as json_file2:
+        # with open("/proc/vsms2_json_out") as json_file2:
+            ofsw_data = json.load(json_file2)
+            ofsw_data.pop('Links')
+    except OSError:
+        json_data = dict()
+        json_data["text"] = "fail"
+        return JsonResponse(json_data)
+
+    temp_arr = list()
+    for node in links_data["nodes"]:
+        for link in node['l']:
+            if link["t"] == "U":
+                add = True
+                for element in temp_arr:
+                    if (element["source"] == link["N"] and
+                       element["target"] == node["id"]):
+                            add = False
+                if add:
+                    temp_dict = dict()
+                    temp_dict["source"] = node["id"]
+                    temp_dict["target"] = link["N"]
+                    temp_dict["status"] = link["ST"]
+                    temp_arr.append(temp_dict)
+        node.pop('l')
+    links_data.update({'links': temp_arr})
+    links_data.pop('nodes')
+    links_data["text"] = "success"
+
+    temp123 = list()
+    for node in ofsw_data["Switches"]:
+        if (node["state"] == "0"):
+            temp123.append(node["name"])
+    # node_data = dict()
+    # node_data.update({'of': temp_arr})
+
+    return JsonResponse({"links_data": links_data, "ofsw_data": temp123})

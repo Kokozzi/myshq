@@ -16,20 +16,49 @@
 
 {% block topology %}
 <div class="wrapper wrapper-content animated fadeInRight">  
-    <div id="graphContainer" class="graphContainer"></div>    
+    <div id="graphContainer" class="graphContainer"></div>
+    
+    <div class="row">
+	    <div class="panel panel-default">
+	        <div class="ibox-title">
+	            <h5 id="service_name">Название сервиса</h5>
+	        </div>
+	        <table class="table table-striped"> 
+	        	<thead>
+		        	<tr>
+			        	<th>Узел доступа 1</th>
+			        	<th>Порт клиента</th>
+			        	<th>Узел доступа 2</th>
+			        	<th>Порт клиента</th>
+		        	</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr>
+	        		{% for node in service.nodes %}
+	        			<td>{{ node.name }}</td>
+	        			<td>Ethernet1/0/{{node.physical}}</td>
+	        		{% endfor %}
+		        	</tr>
+	        	</tbody>
+	        </table>
+	    </div>
+	</div>
+    	
 </div> 
 {% endblock topology %}
 
 {% block topology_scripts %}
 <script>
-var data = {{ node|safe }};
-var service = {{ service|safe }};
-var path = "{{ path|safe }}";
+var data = {{ node|safe }},
+	service = {{ service|safe }},
+	path = "{{ path|safe }}",
+	URL = "{% url 'devices:refresh' %}";
 </script>
 <script src="{% static 'js/d3.min.js' %}"></script>
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
 <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
 <script src="{% static 'js/service_detail.js' %}"></script>
+<script src="{% static 'js/service_detail_marker.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
 <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>

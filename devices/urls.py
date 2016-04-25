@@ -16,6 +16,7 @@ urlpatterns = [
         service_list_view, name='service_list'),
     url(r'^service/(?P<pk>.+)/$',
         service_detail_view, name='service_detail'),
+    url(r'^refresh/$', topo_refresh, name='refresh'),
 ]
 
 # url(r'^$', views.index, name='index'),

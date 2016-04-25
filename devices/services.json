@@ -1,42 +1,82 @@
 {
     "services": [
         {
-            "name": "da",
-            "bw": "",
-            "nodes": [
-                {
-                    "port": "",
-                    "id": "113833460647",
-                    "physical": "23",
-                    "ip": ""
-                },
-                {
-                    "port": "",
-                    "id": "113833410564",
-                    "physical": "11",
-                    "ip": ""
-                }
-            ],
             "tunnels": [
                 {
                     "src": "113833460647",
-                    "src_port": "23",
-                    "path": "113833460647-83917578-687897354-520125194-113833460649-113833410564-",
-                    "dst_port": "11",
+                    "tun_name": "bnmq1--1",
+                    "src_port": "25",
+                    "path": "Switch2,10.123.0.5,10.123.0.41,10.123.0.31,Switch3",
+                    "dst": "113833460649",
+                    "dst_port": "9",
+                    "path_name": "bnmq1--1"
+                },
+                {
+                    "src": "113833460649",
+                    "tun_name": "bnmq1--2",
+                    "src_port": "9",
+                    "path": "Switch3,10.123.0.31,10.123.0.41,10.123.0.5,Switch2",
+                    "dst": "113833460647",
+                    "dst_port": "25",
+                    "path_name": "bnmq1--2"
+                }
+            ],
+            "name": "bnmq1",
+            "nodes": [
+                {
+                    "physical": "25",
+                    "port": "",
+                    "ip": "",
+                    "id": "113833460647"
+                },
+                {
+                    "physical": "9",
+                    "port": "",
+                    "ip": "",
+                    "id": "113833460649"
+                }
+            ],
+            "bw": ""
+        },
+        {
+            "tunnels": [
+                {
+                    "src": "113833460647",
+                    "tun_name": "oitr--1",
+                    "src_port": "22",
+                    "path": "Switch1,10.123.0.5,10.123.0.41,10.123.0.31,Switch4,Switch2",
                     "dst": "113833410564",
-                    "tun_name": "da--1",
-                    "path_name": "da--1"
+                    "dst_port": "10",
+                    "path_name": "oitr--1"
                 },
                 {
                     "src": "113833410564",
-                    "src_port": "11",
-                    "path": "113833410564-113833460649-520125194-687897354-83917578-113833460647-",
-                    "dst_port": "23",
+                    "tun_name": "oitr--2",
+                    "src_port": "10",
+                    "path": "Switch2,Switch4,10.123.0.31,10.123.0.41,10.123.0.5,Switch1",
                     "dst": "113833460647",
-                    "tun_name": "da--2",
-                    "path_name": "da--2"
+                    "dst_port": "22",
+                    "path_name": "oitr--2"
                 }
-            ]
+            ],
+            "name": "oitr",
+            "nodes": [
+                {
+                    "physical": "22",
+                    "port": "",
+                    "ip": "",
+                    "id": "113833460647",
+                    "name": "Switch1"
+                },
+                {
+                    "physical": "10",
+                    "port": "",
+                    "ip": "",
+                    "id": "113833410564",
+                    "name": "Switch2"
+                }
+            ],
+            "bw": ""
         }
     ]
 }
