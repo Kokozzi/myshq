@@ -1,0 +1,7 @@
+python /root/projects/marrow/modules-uspace/marrow.py topology
+
+python /root/projects/marrow/modules-uspace/marrow.py tunnels
+
+python /root/projects/marrow/modules-uspace/marrow.py create-tunnel -S=113833460651 -D=113833460647 -sP=9 -dP=11 -N=qwerty123
+
+python /root/projects/marrow/modules-uspace/marrow.py remove-tunnel -N=qwerty123

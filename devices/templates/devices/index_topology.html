@@ -30,7 +30,8 @@
 
 {% block topology_scripts %}
 <script>
-var data = {{ node|safe }};
+var data = {{ node|safe }},
+    URL = "{% url 'devices:refresh' %}";
 </script>
 <script src="{% static 'js/d3.min.js' %}"></script>
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
@@ -41,4 +42,5 @@ var data = {{ node|safe }};
 <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
 <script src="{% static 'js/inspinia.js' %}"></script>
 <script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'js/topology_refresh.js' %}"></script>
 {% endblock topology_scripts %}

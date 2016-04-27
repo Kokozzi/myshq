@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                 <div class="panel panel-default">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -38,6 +38,10 @@
 									<th scope="row">Protocol Version</th>
 									<td id="protocol_vers">{{ node.ProtocolVersion }}</td>
 								</tr>
+                                <tr>
+                                    <th scope="row">Soft Version</th>
+                                    <td id="serial">{{ node.SoftVersion }}</td>
+                                </tr>
 								<tr>
 									<th scope="row">Connection IP Address</th>
 									<td id="ip_conn">{{ node.IpAddressConn }}</td>
@@ -66,6 +70,10 @@
 									<th scope="row">Config</th>
 									<td id="config">{{ node.config }}</td>
 								</tr>
+                                <tr>
+                                    <th scope="row">DP Description</th>
+                                    <td id="config">{{ node.Dpdescr }}</td>
+                                </tr>
 								<tr>
 									<th scope="row">Current Features</th>
 									<td id="curr_features">{{ node.currentFeatures }}</td>
@@ -89,7 +97,7 @@
             </div>
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="panel panel-default">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -105,14 +113,20 @@
                                 <th>RX Bytes</th>
                                 <th>TX Packets</th>
                                 <th>RX Packets</th>
-                                <th>Dropped</th>
-                                <th>Errors</th>
+                                <th>TX Dropped</th>
+                                <th>RX Dropped</th>
+                                <th>TX Errors</th>
+                                <th>RX Errors</th>
+                                <th>Frame Alignment</th>
+                                <th>CRC Errors</th>
+                                <th>Overrun</th>
+                                <th>Collisions</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             {% for port in node.Ports %}
-                                {% if port.connection_status == "up" %}
+                                {% if port.connection_status == "1" %}
                                     <tr><th><h4><span class="label label-primary">{{ port.name }}</span></h4></th>
                                 {% else %}
                                     <tr><th><h4><span class="label label-danger">{{ port.name }}</span></h4></th>
@@ -121,9 +135,15 @@
                                 <td>{{ port.TxB }}</td>
                                 <td>{{ port.RxB }}</td>
                                 <td>{{ port.TxP }}</td>
-                                <td>{{ port.RxP }}</td>
-                                <td>{{ port.Dropped }}</td>
-                                <td>{{ port.Error }}</td>
+                                <td>{{ port.RXP }}</td>
+                                <td>{{ port.TxD }}</td>
+                                <td>{{ port.RxD }}</td>
+                                <td>{{ port.TxE }}</td>
+                                <td>{{ port.RxE }}</td>
+                                <td>{{ port.RxF }}</td>
+                                <td>{{ port.RxC }}</td>
+                                <td>{{ port.RxO }}</td>
+                                <td>{{ port.Col }}</td>
                             {% endfor %}
 
                             </tbody>

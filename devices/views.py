@@ -1,12 +1,13 @@
 from django.views.generic.detail import DetailView
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from subprocess import check_output, CalledProcessError
 import json
 
 from .models import Device
-from .forms import AddDeviceForm
+
+# assert False, request.POST
 
 
 def Int2IP(ipnum):
@@ -17,27 +18,83 @@ def Int2IP(ipnum):
     return '%(o4)s.%(o3)s.%(o2)s.%(o1)s' % locals()
 
 
-def topology_generator():
-    id_dict = dict()
-
+def get_topo_local():
     try:
-        with open("/home/tsibulya/sdn/devices/topo_real.json") as json_file:
-        # with open("/proc/marrow/dispatcher/topology") as json_file:
-            json_data = json.load(json_file)
+        with open("/home/tsibulya/sdn/devices/topo_real.json") as topo_file:
+            topology = json.load(topo_file)
     except OSError:
-            json_data = dict()
-            json_data["nodes"] = 0
-            return json_data
+        topology = dict()
+        topology["nodes"] = 0
+    return topology
 
+
+def get_topo_prod():
+    p = "python"
+    path = "/root/projects/marrow/modules-uspace/marrow.py"
+    cmd = "topology"
     try:
-        with open("/home/tsibulya/sdn/devices/device_real2.json") as json_file2:
-        # with open("/proc/vsms2_json_out") as json_file2:
-            json_device = json.load(json_file2)
-            json_device.pop('Links')
-            data_flag = True
-    except (OSError, ValueError):
-            data_flag = False
+        topology = json.loads(check_output([p, path, cmd]).decode('utf-8'))
+    except CalledProcessError:
+        topology = dict()
+        topology["nodes"] = 0
+    return topology
 
+
+def get_of_local():
+    try:
+        with open("/home/tsibulya/sdn/devices/device_real3.json") as js:
+            of_device = json.load(js)
+    except (OSError, ValueError):
+        of_device = dict()
+        of_device["Switches"] = "no data"
+    return of_device
+
+
+def get_of_prod():
+    try:
+        with open("/proc/vsms2_json_out") as js:
+            of_device = json.load(js)
+    except (OSError, ValueError):
+        of_device = dict()
+        of_device["Switches"] = "no data"
+    return of_device
+
+
+def get_services_local():
+    try:
+        with open('/home/tsibulya/sdn/devices/services_real.json') as js:
+            services = json.load(js)
+    except (OSError, ValueError):
+        services = dict()
+        services["tunnels"] = "no data"
+    return services
+
+
+def get_services_prod():
+    p = "python"
+    path = "/root/projects/marrow/modules-uspace/marrow.py"
+    cmd = "tunnels"
+    try:
+        services = json.loads(check_output([p, path, cmd]).decode('utf-8'))
+    except CalledProcessError:
+        services = dict()
+        services["tunnels"] = "no data"
+    return services
+
+
+def topology_generator():
+    ##
+    json_data = get_topo_local()
+    if (json_data["nodes"] == 0):
+        return json_data
+    ##
+    json_device = get_of_local()
+    if (json_device["Switches"] == "no data"):
+        data_flag = False
+    else:
+        data_flag = True
+
+    id_dict = dict()
     temp_arr = list()
 
     for node in json_data["nodes"]:
@@ -132,16 +189,14 @@ def base_page_view(request):
 
 
 def device_list_view(request):
-    try:
-        with open("/home/tsibulya/sdn/devices/device_real2.json") as sdn_file:
-        # with open("/proc/vsms2_json_out") as sdn_file:
-            json_sdn = json.load(sdn_file)
-            json_sdn.pop('Links')
-            sdn_opened = True
-    except (OSError, ValueError):
-            sdn = dict()
-            sdn["nodes"] = "no data"
-            sdn_opened = False
+    ##
+    json_sdn = get_of_local()
+    if (json_sdn["Switches"] == "no data"):
+        sdn_opened = False
+    else:
+        sdn_opened = True
+
+    legacy = Device.objects.all()
 
     if (sdn_opened is True):
         temp_arr = list()
@@ -156,30 +211,25 @@ def device_list_view(request):
             temp_arr.append(temp_dict)
         sdn = dict()
         sdn.update({"Switches": temp_arr})
-
-    legacy = Device.objects.all()
-
-    return render(request, 'devices/index_list_all.html',
-                  {'node_sdn': sdn, 'node_legacy': legacy})
+        return render(request, 'devices/index_list_all.html',
+                      {'node_sdn': sdn, 'node_legacy': legacy})
+    else:
+        return render(request, 'devices/index_list_all.html',
+                      {'node_legacy': legacy})
 
 
 def device_sdn_view(request, pk):
-    try:
-        with open("/home/tsibulya/sdn/devices/device_real2.json") as json_file:
-        # with open("/proc/vsms2_json_out") as json_file:
-            json_device = json.load(json_file)
-            json_device.pop('Links')
-    except (OSError, ValueError):
-            json_device = dict()
-            json_device["nodes"] = "no data"
-            return render(request, 'devices/index_sdn_detail.html',
-                          {'node': json_device})
-
-    for sw in json_device["Switches"]:
-        if (sw["DatapathId"] == pk):
-            return render(request, 'devices/index_sdn_detail.html',
-                          {'node': sw})
-    raise Http404("No such sdn device!")
+    ##
+    json_sdn = get_of_local()
+    if (json_sdn["Switches"] == "no data"):
+        return render(request, 'devices/index_sdn_detail.html',
+                      {'node': json_sdn})
+    else:
+        for sw in json_sdn["Switches"]:
+            if (sw["DatapathId"] == pk):
+                return render(request, 'devices/index_sdn_detail.html',
+                              {'node': sw})
+        raise Http404("No such sdn device!")
 
 
 def device_legacy_view(request, pk):
@@ -199,173 +249,191 @@ def topology_view(request):
 @csrf_exempt
 def service_add_view(request):
     if request.method == 'POST':
-        try:
-            with open("/home/tsibulya/sdn/devices/device_real2.json") as json_file:
-            # with open("/proc/vsms2_json_out") as json_file:
-                json_device = json.load(json_file)
-                json_device.pop('Links')
-        except (OSError, ValueError):
+        ##
+        json_device = get_of_local()
+        if (json_device["Switches"] == "no data"):
             return HttpResponse('fail')
-        name = request.POST['name']
+
+        p = "python"
+        path = "/root/projects/marrow/modules-uspace/marrow.py"
+        cmd = "create-tunnel"
+        src = "-S="
+        dst = "-D="
+        src_port = "-sP="
+        dst_port = "-dP="
+        name = "-N="
+
+        src_name = str(request.POST["nodes[0][name]"])
+        dst_name = str(request.POST["nodes[1][name]"])
+        for sw in json_device["Switches"]:
+            if (str(sw["name"]) == src_name):
+                src += str(sw["DatapathId"])
+            elif (str(sw["name"]) == dst_name):
+                dst += str(sw["DatapathId"])
+
+        src_port_name = str(request.POST['nodes[0][physical]'])
+        dst_port_name = str(request.POST['nodes[1][physical]'])
+        src_port += src_port_name.split("/")[2]
+        dst_port += dst_port_name.split("/")[2]
+
+        post_name = str(request.POST['name'])
         for ch in [" ", "/"]:
-            if ch in str(name):
-                str(name).replace(ch, '_')
-        count = int(request.POST["count"])
-        pe = list()
-        i = 0
-        while (i < count):
-            node = dict()
-            for sw in json_device["Switches"]:
-                if (str(request.POST['nodes[' + str(i) + '][name]']) == str(sw["name"])):
-                    node["id"] = sw["DatapathId"]
-            node["physical"] = request.POST['nodes[' + str(i) + '][physical]']
-            node["physical"] = str(node["physical"]).split("/")[2]
-            node["ip"] = request.POST['nodes[' + str(i) + '][ip]']
-            node["port"] = request.POST['nodes[' + str(i) + '][port]']
-            node["name"] = str(request.POST['nodes[' + str(i) + '][name]'])
-            pe.append(node)
-            i += 1
+            if ch in post_name:
+                post_name.replace(ch, '_')
+        name += post_name
 
-        # assert False, request.POST
+        try:
+            json.loads(check_output([p, path, cmd, src,
+                                    dst, src_port,
+                                    dst_port, name]).decode('utf-8'))
+            name += "_backward"
+            new_src = "-S=" + dst[3:]
+            new_dst = "-D=" + src[3:]
+            new_src_port = "-sP=" + dst_port[4:]
+            new_dst_port = "-dP=" + src_port[4:]
+            json.loads(check_output([p, path, cmd, new_src,
+                                    new_dst, new_src_port,
+                                    new_dst_port, name]).decode('utf-8'))
+        except CalledProcessError:
+            return HttpResponse('fail')
 
-        i = 0
-        modulus = len(pe)
-        command = list()
-        while (i < modulus):
-            text = "apply_tunnel_route:"
-            text += name + "--" + str(i + 1) + "/" + name + "--" + str(i + 1) + ":"
-            text += str(pe[i % modulus]["id"]) + ":"
-            text += str(pe[i % modulus]["physical"]) + ":"
-            text += str(pe[(i + 1) % modulus]["id"]) + ":"
-            text += str(pe[(i + 1) % modulus]["physical"]) + ":"
-            command.append(text)
-            i += 1
-
-        service_dict = dict()
-        service_dict["name"] = name
-        service_dict.update({'nodes': pe})
-        service_dict["bw"] = request.POST['bw']
-
-        tunnels_array = list()
-        i = 0
-        while i < modulus:
-            tun_dict = dict()
-            tun_dict["tun_name"] = name + "--" + str(i + 1)
-            tun_dict["path_name"] = tun_dict["tun_name"]
-            tun_dict["src"] = str(pe[i % modulus]["id"])
-            tun_dict["src_name"] = str(pe[i % modulus]["name"])
-            tun_dict["src_port"] = str(pe[i % modulus]["physical"])
-            tun_dict["dst"] = str(pe[(i + 1) % modulus]["id"])
-            tun_dict["dst_name"] = str(pe[(i + 1) % modulus]["name"])
-            tun_dict["dst_port"] = str(pe[(i + 1) % modulus]["physical"])
-            tunnels_array.append(tun_dict)
-            i += 1
-
-        service_dict.update({'tunnels': tunnels_array})
-
-        # i = 0
-        # node = topology_generator()
-        # for cmd in command:
-        #     try:
-        #         result = json.loads(check_output(['python', '/root/projects/marrow/python-marrow/test.py', '33', cmd]).decode('utf-8'))
-        #     except CalledProcessError:
-        #         try:
-        #             result = json.loads(check_output(['python', '/root/projects/marrow/python-marrow/test.py', '33', cmd]).decode('utf-8'))
-        #         except CalledProcessError:
-        #             return HttpResponse('path_fail')
-        #     path = ""
-        #     for elem in result["path"]:
-        #         for n in node["nodes"]:
-        #             if (str(elem) == str(n["DatapathId"])):
-        #                 path += n["name"] + ","
-        #     path = path[0:-1]
-        #     tunnels_array[i]["path"] = path
-        #     i += 1
-
-        with open('/home/tsibulya/sdn/devices/services.json', 'r+') as services_json:
-        # with open('/var/www/sdn/devices/services.json', 'r+') as services_json:
-            services = json.load(services_json)
-            services["services"].append(service_dict)
-            services_json.seek(0)
-            json.dump(services, services_json, indent=4)
-
-        # band = request.POST['bw']
-        # req_nodes = request.POST.getlist('req_nodes')
-        # req_links = request.POST.getlist('req_links')
         response = dict()
         response["text"] = "success"
-        response["name"] = name
+        response["name"] = post_name
         return JsonResponse(response)
-    return render(request, 'devices/index_service_add.html',
-                  {'node': topology_generator()})
+    else:
+        return render(request, 'devices/index_service_add.html',
+                      {'node': topology_generator()})
 
 
 def service_detail_view(request, pk):
-    with open('/home/tsibulya/sdn/devices/services.json') as services_json:
-    # with open('/var/www/sdn/devices/services.json') as services_json:
-        services = json.load(services_json)
-        for serv in services["services"]:
-            if (serv["name"] == pk):
-                # path_arr = str(serv["tunnels"][0]["path"]).split('-')
-                # path_arr.pop()
-                # path = ""
-                # for elem in path_arr:
-                #     path += str(elem) + "-"
+    ##
+    json_device = get_of_local()
+    if (json_device["Switches"] == "no data"):
+        data_flag = False
+    else:
+        data_flag = True
+    ##
+    services = get_services_local()
+    if (services["tunnels"] == "no data"):
+        raise Http404("No such service!")
+    else:
+        for serv in services["tunnels"]:
+            if (str(serv["name"]).replace("/", "_") == pk):
+                path_arr = serv["path"]["nodes"]
+                path = ""
+                for node in path_arr:
+                    added = False
+                    for sw in json_device["Switches"]:
+                        if (str(node) == sw["DatapathId"]):
+                            path += str(sw["name"])
+                            added = True
+                    if (added is False):
+                        path += str(Int2IP(node))
+                    path += ","
+                path = path[0:-1]
+
+                tunnels_array = list()
+                temp_dict = dict()
+                temp_dict["name"] = str(serv["name"]).replace("/", "_")
+                temp_dict["src_port"] = "Ethernet1/0/" + str(serv["src_port"])
+                temp_dict["dst_port"] = "Ethernet1/0/" + str(serv["dst_port"])
+                temp_dict["active_path"] = serv["active_path"]
+                if (data_flag is True):
+                    for sw in json_device["Switches"]:
+                        if (str(serv["src"]) == sw["DatapathId"]):
+                            temp_dict["src"] = sw["name"]
+                        elif (str(serv["dst"]) == sw["DatapathId"]):
+                            temp_dict["dst"] = sw["name"]
+                else:
+                    temp_dict["src"] = serv["src"]
+                    temp_dict["dst"] = serv["dst"]
+                tunnels_array.append(temp_dict)
+
                 return render(request, 'devices/index_service_detail.html',
-                              {'node': topology_generator(), 'service': serv,
-                               'path': serv["tunnels"][0]["path"]})
-    raise Http404("No such service!")
+                              {'node': topology_generator(),
+                               'service': tunnels_array,
+                               'path': path})
+        raise Http404("No such service!")
 
 
 @csrf_exempt
 def service_list_view(request):
     if request.method == 'POST':
-        name = request.POST['name']
+        post_name = str(request.POST['name'])
+
+        p = "python"
+        path = "/root/projects/marrow/modules-uspace/marrow.py"
+        cmd = "remove-tunnel"
+        name = "-N=" + post_name
+
+        name.replace("_backward", "")
+
         response = dict()
-        response["text"] = "success"
-        response["name"] = name
+        response["name"] = post_name
+        try:
+            json.loads(check_output([p, path, cmd, name]).decode('utf-8'))
+            name += "_backward"
+            json.loads(check_output([p, path, cmd, name]).decode('utf-8'))
+            response["text"] = "success"
+        except CalledProcessError:
+            return HttpResponse('fail')
+            response["text"] = "fail"
+
         return JsonResponse(response)
     else:
-        try:
-            with open('/home/tsibulya/sdn/devices/services.json') as services_json:
-            # with open('/var/www/sdn/devices/services.json') as services_json:
-                services = json.load(services_json)
-                return render(request, 'devices/index_services_list.html',
-                              {'services': services})
-        except (OSError, ValueError):
+        ##
+        json_device = get_of_local()
+        if (json_device["Switches"] == "no data"):
+            data_flag = False
+        else:
+            data_flag = True
+        ##
+        services = get_services_local()
+        if (services["tunnels"] == "no data"):
             return render(request, 'devices/index_services_list.html')
+        else:
+            tunnels_array = list()
+            for serv in services["tunnels"]:
+                temp_dict = dict()
+                temp_dict["name"] = str(serv["name"]).replace("/", "_")
+                temp_dict["src_port"] = "Ethernet1/0/" + str(serv["src_port"])
+                temp_dict["dst_port"] = "Ethernet1/0/" + str(serv["dst_port"])
+                if (data_flag is True):
+                    for sw in json_device["Switches"]:
+                        if (str(serv["src"]) == sw["DatapathId"]):
+                            temp_dict["src"] = sw["name"]
+                        elif (str(serv["dst"]) == sw["DatapathId"]):
+                            temp_dict["dst"] = sw["name"]
+                else:
+                    temp_dict["src"] = serv["src"]
+                    temp_dict["dst"] = serv["dst"]
+                tunnels_array.append(temp_dict)
 
-
-def add_device(request):
-    if request.method == "POST":
-        form = AddDeviceForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('devices:list')
-    else:
-        form = AddDeviceForm()
-    return render(request, 'devices/base_device_add.html', {'form': form})
+            return render(request, 'devices/index_services_list.html',
+                          {'services': tunnels_array})
 
 
 @csrf_exempt
 def topo_refresh(request):
-    try:
-        with open("/home/tsibulya/sdn/devices/topo_real.json") as json_file:
-        # with open("/proc/marrow/dispatcher/topology") as json_file:
-            links_data = json.load(json_file)
-        with open("/home/tsibulya/sdn/devices/device_real2.json") as json_file2:
-        # with open("/proc/vsms2_json_out") as json_file2:
-            ofsw_data = json.load(json_file2)
-            ofsw_data.pop('Links')
-    except OSError:
+    ##
+    links_data = get_topo_local()
+    if (links_data["nodes"] == 0):
+        json_data = dict()
+        json_data["text"] = "fail"
+        return JsonResponse(json_data)
+    ##
+    ofsw_data = get_of_local()
+    if (ofsw_data["Switches"] == "no data"):
         json_data = dict()
         json_data["text"] = "fail"
         return JsonResponse(json_data)
 
+    ofsw_data.pop('Links')
     temp_arr = list()
     for node in links_data["nodes"]:
         for link in node['l']:
-            if link["t"] == "U":
+            if ((link["t"] == "U") and (link["ST"] == 0)):
                 add = True
                 for element in temp_arr:
                     if (element["source"] == link["N"] and
@@ -375,7 +443,6 @@ def topo_refresh(request):
                     temp_dict = dict()
                     temp_dict["source"] = node["id"]
                     temp_dict["target"] = link["N"]
-                    temp_dict["status"] = link["ST"]
                     temp_arr.append(temp_dict)
         node.pop('l')
     links_data.update({'links': temp_arr})
@@ -386,7 +453,44 @@ def topo_refresh(request):
     for node in ofsw_data["Switches"]:
         if (node["state"] == "0"):
             temp123.append(node["name"])
-    # node_data = dict()
-    # node_data.update({'of': temp_arr})
 
     return JsonResponse({"links_data": links_data, "ofsw_data": temp123})
+
+
+@csrf_exempt
+def service_refresh(request):
+    ##
+    services_data = get_services_local()
+    if (services_data["tunnels"] == "no data"):
+        json_data = dict()
+        json_data["text"] = "fail"
+        return JsonResponse(json_data)
+    ##
+    ofsw_data = get_of_local()
+    if (ofsw_data["Switches"] == "no data"):
+        json_data = dict()
+        json_data["text"] = "fail"
+        return JsonResponse(json_data)
+
+    req_type = str(request.POST["type"])
+    pk = str(request.POST["name"])
+
+    for serv in services_data["tunnels"]:
+        if (str(serv["name"]).replace("/", "_") == pk):
+            if (req_type == "part"):
+                active_path = serv["active_path"]
+                return JsonResponse({"active_path": active_path})
+            path_arr = serv["path"]["nodes"]
+            path = ""
+            for node in path_arr:
+                added = False
+                for sw in ofsw_data["Switches"]:
+                    if (str(node) == sw["DatapathId"]):
+                        path += str(sw["name"])
+                        added = True
+                if (added is False):
+                    path += str(Int2IP(node))
+                path += ","
+            path = path[0:-1]
+
+        return JsonResponse({"path": path})

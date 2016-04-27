@@ -5,7 +5,6 @@ app_name = 'devices'
 urlpatterns = [
     url(r'^$', base_page_view, name='base'),
     url(r'^topology/$', topology_view, name='topology'),
-    url(r'^add/$', add_device, name='add'),
     url(r'^list/$', device_list_view, name='device_list'),
     url(r'^legacy_detail/(?P<pk>[0-9]+)/$',
         DeviceInfoView.as_view(), name='legacy_detail'),
@@ -17,6 +16,7 @@ urlpatterns = [
     url(r'^service/(?P<pk>.+)/$',
         service_detail_view, name='service_detail'),
     url(r'^refresh/$', topo_refresh, name='refresh'),
+    url(r'^service_refresh/$', service_refresh, name='service_refresh'),
 ]
 
 # url(r'^$', views.index, name='index'),

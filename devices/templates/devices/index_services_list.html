@@ -33,13 +33,13 @@
                             </tr>
                             </thead>
                             <tbody>
-	                            {% for service in services.services %}
+	                            {% for service in services %}
 	                            <tr>
                                     <td><a href="{% url 'devices:service_detail' service.name %}">{{ service.name }}</a></td>
-                                    {% for node in service.nodes %}
-                                        <td>{{ node.name }}</td>
-                                        <td>Ethernet1/0/{{node.physical}}</td>
-                                    {% endfor %}
+                                    <td>{{ service.src }}</td>
+                                    <td>{{ service.src_port }}</td>
+                                    <td>{{ service.dst }}</td>
+                                    <td>{{ service.dst_port }}</td>
                                     <td><button class="btn btn-danger" type="button"><i class="fa fa-trash"></i>&nbsp;Удалить</button></td>
 	                            </tr>
 	                            {% endfor %}
