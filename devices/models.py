@@ -6,6 +6,8 @@ class Device(models.Model):
         "Hostname", max_length=128, unique=True)
     ip = models.GenericIPAddressField(
         "IP Address", protocol='IPv4', unique=True)
+    cust_ip = models.GenericIPAddressField(
+        protocol='IPv4', blank=True, null=True)
     community = models.CharField(
         "SNMP Community", max_length=40, blank=True, default='public')
 

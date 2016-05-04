@@ -68,6 +68,7 @@
                             <thead>
                             <tr>
                                 <th>Status</th>
+                                <th>Vendor</th>
                                 <th>Device Type</th>
                                 <th>Hostname</th>
                                 <th>IP Address</th>
@@ -86,7 +87,7 @@
 		                                {% else %}
 		                                	<td>Unknown</td>
 		                                {% endif %}
-
+                                        <td><img src="{% static 'img/zelax.png' %}"></td>
 		                                <td>{{ sd.device_type }}</td>
 		                                <td><a href="{% url 'devices:sdn_detail' sd.datapathid %}">{{ sd.hostname }}</a></td> 
 		                                <td> {{ sd.ip }} </td>

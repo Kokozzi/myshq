@@ -31,14 +31,12 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
-                <li class="nav-header">
+                <li class="nav-header" style="padding-top: 15px;">
                     <div class="dropdown profile-element">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">User1</strong>
-                             </span> <span class="text-muted text-xs block">Инженер<b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="#">Выход</a></li>
-                            </ul>
+                            <a href="{% url 'devices:base' %}">
+                            <img src="{% static 'img/logo.png' %}">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold" style="font-size: 17px;">SDN-Контроллер</strong>
+                             </span> <span class="text-muted text-xs block" style="font-size: 13px;">Администратор<b class="caret"></b></span> </span> </a>
                     </div>
                     <div class="logo-element">
                         SDN
@@ -64,12 +62,6 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{% url 'devices:service_list' %}">Все сервисы</a></li>
                         </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Статистика</span> </a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">История</span> </a>
                 </li>
             </ul>
 
@@ -111,7 +103,6 @@
         {% endblock service_add %}
         <div class="footer">
             <div>
-                <strong>Copyright</strong> SDN Project Company &copy; 2016
             </div>
         </div>
 

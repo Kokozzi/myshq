@@ -85,10 +85,12 @@ def get_services_prod():
 def topology_generator():
     ##
     json_data = get_topo_local()
+    # json_data = get_topo_prod()
     if (json_data["nodes"] == 0):
         return json_data
     ##
     json_device = get_of_local()
+    # json_device = get_of_prod()
     if (json_device["Switches"] == "no data"):
         data_flag = False
     else:
@@ -156,7 +158,13 @@ def topology_generator():
             else:
                 node['icon'] = "../../../static/img/router.svg"
                 node['DatapathId'] = node['name']
-                node['name'] = Int2IP(node['name'])
+                node['IpAddress'] = Int2IP(node['name'])
+
+                legacy = Device.objects.get(cust_ip=node['IpAddress'])
+                node['name'] = legacy.hostname
+                node['device_type'] = legacy.hardware
+                node['company'] = legacy.icon
+                node['serial'] = legacy.serial
         else:
             if node['t'] == 1:
                 node['icon'] = "../../../static/img/switch-d.svg"
@@ -191,6 +199,7 @@ def base_page_view(request):
 def device_list_view(request):
     ##
     json_sdn = get_of_local()
+    # json_sdn = get_of_prod()
     if (json_sdn["Switches"] == "no data"):
         sdn_opened = False
     else:
@@ -221,6 +230,7 @@ def device_list_view(request):
 def device_sdn_view(request, pk):
     ##
     json_sdn = get_of_local()
+    # json_sdn = get_of_prod()
     if (json_sdn["Switches"] == "no data"):
         return render(request, 'devices/index_sdn_detail.html',
                       {'node': json_sdn})
@@ -251,6 +261,7 @@ def service_add_view(request):
     if request.method == 'POST':
         ##
         json_device = get_of_local()
+        # json_device = get_of_prod()
         if (json_device["Switches"] == "no data"):
             return HttpResponse('fail')
 
@@ -309,12 +320,14 @@ def service_add_view(request):
 def service_detail_view(request, pk):
     ##
     json_device = get_of_local()
+    # json_device = get_of_prod()
     if (json_device["Switches"] == "no data"):
         data_flag = False
     else:
         data_flag = True
     ##
     services = get_services_local()
+    # services = get_services_prod()
     if (services["tunnels"] == "no data"):
         raise Http404("No such service!")
     else:
@@ -329,7 +342,8 @@ def service_detail_view(request, pk):
                             path += str(sw["name"])
                             added = True
                     if (added is False):
-                        path += str(Int2IP(node))
+                        legacy = Device.objects.get(cust_ip=str(Int2IP(node)))
+                        path += legacy.hostname
                     path += ","
                 path = path[0:-1]
 
@@ -384,12 +398,14 @@ def service_list_view(request):
     else:
         ##
         json_device = get_of_local()
+        # json_device = get_of_prod()
         if (json_device["Switches"] == "no data"):
             data_flag = False
         else:
             data_flag = True
         ##
         services = get_services_local()
+        # services = get_services_prod()
         if (services["tunnels"] == "no data"):
             return render(request, 'devices/index_services_list.html')
         else:
@@ -418,12 +434,14 @@ def service_list_view(request):
 def topo_refresh(request):
     ##
     links_data = get_topo_local()
+    # links_data = get_topo_prod()
     if (links_data["nodes"] == 0):
         json_data = dict()
         json_data["text"] = "fail"
         return JsonResponse(json_data)
     ##
     ofsw_data = get_of_local()
+    # ofsw_data = get_of_prod()
     if (ofsw_data["Switches"] == "no data"):
         json_data = dict()
         json_data["text"] = "fail"
@@ -461,12 +479,14 @@ def topo_refresh(request):
 def service_refresh(request):
     ##
     services_data = get_services_local()
+    # services_data = get_services_prod()
     if (services_data["tunnels"] == "no data"):
         json_data = dict()
         json_data["text"] = "fail"
         return JsonResponse(json_data)
     ##
     ofsw_data = get_of_local()
+    # ofsw_data = get_of_prod()
     if (ofsw_data["Switches"] == "no data"):
         json_data = dict()
         json_data["text"] = "fail"
@@ -489,7 +509,8 @@ def service_refresh(request):
                         path += str(sw["name"])
                         added = True
                 if (added is False):
-                    path += str(Int2IP(node))
+                    legacy = Device.objects.get(cust_ip=str(Int2IP(node)))
+                    path += legacy.hostname
                 path += ","
             path = path[0:-1]
 
