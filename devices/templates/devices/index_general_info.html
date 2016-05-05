@@ -1,4 +1,5 @@
 {% extends "devices/index.html" %}
+{% load staticfiles %}
 
 {% block active_main_page %}<li class="active">{% endblock active_main_page %}
 
@@ -8,11 +9,14 @@
                 <div class="col-lg-12">
                     <div class="text-center m-t-lg">
                         <h1>
-                            Система управления SDN
+                            SDN-система
+                            <p>
+                            Сетевого управления
                         </h1>
-                        <small>
+                        <img width="50%;" height="50%;" src="{% static 'img/pict1.jpg' %}">
+                        <!-- <small>
                             Базовый функционал по мониторингу устройств, их топологии и управлению маршрутами
-                        </small>
+                        </small> -->
                     </div>
                 </div>
             </div>

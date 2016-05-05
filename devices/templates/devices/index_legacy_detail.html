@@ -18,7 +18,7 @@
 	                            {% else %}
 	                                <td style="padding: 27px;" width=5% align="center" valign="middle" ></td>
 	                            {% endif %}
-                                <td><h3>{{ object.hostname }}</h3>{{ object.location }}<br>{{ object.ip }}</td>
+                                <td><h3>{{ object.hostname }}</h3>{{ object.hardware }}<br>{{ object.ip }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -36,19 +36,19 @@
                         <table class="table table-striped">
                             <tbody>
 								<tr>
-									<th scope="row">System Name</th>
+									<th scope="row">Системное имя</th>
 									<td>{{ object.sysname }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Hardware</th>
+									<th scope="row">Модель</th>
 									<td>{{ object.hardware }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Operating System</th>
+									<th scope="row">Операционная система</th>
 									<td>{{ object.os }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Serial Number</th>
+									<th scope="row">Серийный номер</th>
 									<td>{{ object.serial }}</td>
 								</tr>
 								<tr>
@@ -56,15 +56,15 @@
 									<td>{{ object.community }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Uptime</th>
+									<th scope="row">Время работы</th>
 									<td>{{ object.uptime }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Last Polled</th>
+									<th scope="row">Время последнего опроса</th>
 									<td>{{ object.last_polled }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Last Updated</th>
+									<th scope="row">Время последнего обновления</th>
 									<td>{{ object.last_updated }}</td>
 								</tr>
                             </tbody>

@@ -12,8 +12,13 @@
                         <table id="sdn_header_table" class="table">
                             <tbody>
                             <tr>
+                            {% if node.TypeOfSwitch != "00.00.02" %}
 	                            <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/zelax.png' %}"></td>
-                                <td><h3>{{ node.name }}</h3>{{ node.TypeOfSwitch }}<br>{{ node.IpAddress }}</td>
+                                <td><h3>{{ sdn.hostname }}</h3>ZES-3028<br>{{ node.IpAddress }}</td>
+                            {% else %}
+                                <td style="padding: 27px;" width=5% align="center" valign="middle" ><img src="{% static 'img/zelax.png' %}"></td>
+                                <td><h3>{{ node.name }}</h3>{{ node.Dpdescr }}<br>{{ node.IpAddress }}</td>
+                            {% endif %}
                             </tr>
                             </tbody>
                         </table>
@@ -31,51 +36,51 @@
                         <table id="sdn_detail_table" class="table table-striped">
                             <tbody>
 								<tr>
-									<th scope="row">Vendor</th>
-									<td id="company">{{ node.CompanyName }}</td>
+									<th scope="row">Производитель</th>
+									<td id="company">Zelax</td>
 								</tr>
 								<tr>
-									<th scope="row">Protocol Version</th>
-									<td id="protocol_vers">{{ node.ProtocolVersion }}</td>
+									<th scope="row">Версия протокола</th>
+									<td id="protocol_vers">1.0</td>
 								</tr>
                                 <tr>
-                                    <th scope="row">Soft Version</th>
+                                    <th scope="row">Версия программного обеспечения</th>
                                     <td id="serial">{{ node.SoftVersion }}</td>
                                 </tr>
 								<tr>
-									<th scope="row">Connection IP Address</th>
+									<th scope="row">IP Адрес контроллера</th>
 									<td id="ip_conn">{{ node.IpAddressConn }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Port Number</th>
+									<th scope="row">Номер порта</th>
 									<td id="port">{{ node.portNumber }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Hardware Address</th>
+									<th scope="row">MAC-адрес</th>
 									<td id="hw_address">{{ node.hardwareAddress }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Connection Start Date</th>
+									<th scope="row">Дата начала сессии</th>
 									<td id="date_start_conn">{{ node.DateStartConn }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Connection Start Time</th>
+									<th scope="row">Время начала сессии</th>
 									<td id="time_start_conn">{{ node.TimeStartConn }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Serial Number</th>
+									<th scope="row">Серийный номер</th>
 									<td id="serial">{{ node.SN }}</td>
 								</tr>
-								<tr>
-									<th scope="row">Config</th>
+<!-- 								<tr>
+									<th scope="row">Конфигурация</th>
 									<td id="config">{{ node.config }}</td>
 								</tr>
                                 <tr>
-                                    <th scope="row">DP Description</th>
+                                    <th scope="row">Описание</th>
                                     <td id="config">{{ node.Dpdescr }}</td>
                                 </tr>
 								<tr>
-									<th scope="row">Current Features</th>
+									<th scope="row">Текущие возможности</th>
 									<td id="curr_features">{{ node.currentFeatures }}</td>
 								</tr>
 								<tr>
@@ -83,13 +88,13 @@
 									<td id="advert_features">{{ node.advertisedFeatures }}</td>
 								</tr>
 								<tr>
-									<th scope="row">Supported Features</th>
+									<th scope="row">Поддерживаемые возможности</th>
 									<td id="supp_features">{{ node.supportedFeatures }}</td>
 								</tr>
 								<tr>
 									<th scope="row">Peer Features</th>
 									<td id="peer_features">{{ node.peerFeatures }}</td>
-								</tr>
+								</tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -107,45 +112,46 @@
                         <table id="sdn_port_table" class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Interface</th>
-                                <th>Hardware Address</th>
-                                <th>TX Bytes</th>
-                                <th>RX Bytes</th>
-                                <th>TX Packets</th>
-                                <th>RX Packets</th>
-                                <th>TX Dropped</th>
-                                <th>RX Dropped</th>
-                                <th>TX Errors</th>
-                                <th>RX Errors</th>
-                                <th>Frame Alignment</th>
-                                <th>CRC Errors</th>
-                                <th>Overrun</th>
-                                <th>Collisions</th>
+                                <th style="text-align: center">Интерфейс</th>
+                                <th style="text-align: center">MAC-Адрес</th>
+                                <th style="text-align: center">Байт передано</th>
+                                <th style="text-align: center">Байт принято</th>
+                                <th style="text-align: center">Пакетов передано</th>
+                                <th style="text-align: center">Пакетов принято</th>
+<!--                                 <th>TX Dropped</th>
+                                <th>RX Dropped</th> -->
+                                <th style="text-align: center">Ошибок передано</th>
+                                <th style="text-align: center">Ошибок принято</th>
+<!--                                 <th>Frame Alignment</th> -->
+                                <th style="text-align: center">CRC ошибок</th>
+                                <!-- <th>Overrun</th> -->
+                                <th style="text-align: center">Коллизий</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             {% for port in node.Ports %}
+                            {% if port.name != "" %}
                                 {% if port.connection_status == "1" %}
                                     <tr><th><h4><span class="label label-primary">{{ port.name }}</span></h4></th>
                                 {% else %}
                                     <tr><th><h4><span class="label label-danger">{{ port.name }}</span></h4></th>
                                 {% endif %}
-                                <td>{{ port.hw_addr }}</td>
-                                <td>{{ port.TxB }}</td>
-                                <td>{{ port.RxB }}</td>
-                                <td>{{ port.TxP }}</td>
-                                <td>{{ port.RXP }}</td>
-                                <td>{{ port.TxD }}</td>
-                                <td>{{ port.RxD }}</td>
-                                <td>{{ port.TxE }}</td>
-                                <td>{{ port.RxE }}</td>
-                                <td>{{ port.RxF }}</td>
-                                <td>{{ port.RxC }}</td>
-                                <td>{{ port.RxO }}</td>
-                                <td>{{ port.Col }}</td>
+                                <td align="center">{{ port.hw_addr }}</td>
+                                <td align="center">{{ port.TxB }}</td>
+                                <td align="center">{{ port.RxB }}</td>
+                                <td align="center">{{ port.TxP }}</td>
+                                <td align="center">{{ port.RXP }}</td>
+<!--                                 <td align="center">{{ port.TxD }}</td>
+                                <td align="center">{{ port.RxD }}</td> -->
+                                <td align="center">{{ port.TxE }}</td>
+                                <td align="center">{{ port.RxE }}</td>
+                                <!-- <td align="center">{{ port.RxF }}</td> -->
+                                <td align="center">{{ port.RxC }}</td>
+                                <!-- <td align="center">{{ port.RxO }}</td> -->
+                                <td align="center">{{ port.Col }}</td>
+                            {% endif %}
                             {% endfor %}
-
                             </tbody>
                         </table>
                     </div>

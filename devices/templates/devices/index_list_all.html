@@ -9,18 +9,18 @@
             <div class="col-lg-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Legacy Устройства </h5>
+                        <h5>MPLS Устройства </h5>
                     </div>
                     <div class="ibox-content">
 
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Status</th>
-                                <th>Vendor</th>
-                                <th>Hostname</th>
-                                <th>IP Address</th>
-                                <th>Hardware</th>
+                                <th style="text-align: center">Статус </th>
+                                <th style="text-align: center">Производитель</th>
+                                <th style="text-align: center">Узел</th>
+                                <th style="text-align: center">IP Адрес</th>
+                                <th style="text-align: center">Модель</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,16 +36,16 @@
 	                                {% endif %}
 
 	                                {% if device.icon == "Cisco" %}
-	                                	<td><img src="{% static 'img/cisco.png' %}"></td>
+	                                	<td align="center"><img src="{% static 'img/cisco.png' %}"></td>
 	                                {% elif device.icon == "Juniper" %}
-	                                	<td><img src="{% static 'img/junos.png' %}"></td>
+	                                	<td align="center"><img src="{% static 'img/junos.png' %}"></td>
 	                                {% else %}
 	                                	<td>Unknown</td>
 	                                {% endif %}
 
-	                                <td><a href="{% url 'devices:legacy_detail' device.id %}">{{ device.hostname }}</a></td>
-	                                <td> {{ device.ip }} </td>
-	                                <td> {{ device.hardware }} </td>
+	                                <td align="center"><a href="{% url 'devices:legacy_detail' device.id %}">{{ device.hostname }}</a></td>
+	                                <td align="center"> {{ device.ip }} </td>
+	                                <td align="center"> {{ device.hardware }} </td>
 	                            </tr>
 	                            {% endfor %}
 	                        {% else %}
@@ -59,7 +59,7 @@
             <div class="col-lg-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>SDN Устройства </h5>
+                        <h5>OpenFlow Устройства </h5>
                     </div>
                     <div class="ibox-content">
 
@@ -67,12 +67,12 @@
                         {% if node_sdn %}
                             <thead>
                             <tr>
-                                <th>Status</th>
-                                <th>Vendor</th>
-                                <th>Device Type</th>
-                                <th>Hostname</th>
-                                <th>IP Address</th>
-                                <th>Protocol vers.</th>
+                                <th style="text-align: center">Статус</th>
+                                <th style="text-align: center">Производитель</th>
+                                <th style="text-align: center">Узел</th>
+                                <th style="text-align: center">IP Адрес</th>
+                                <th style="text-align: center">Модель</th>
+                                <th style="text-align: center">Версия протокола</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -87,11 +87,13 @@
 		                                {% else %}
 		                                	<td>Unknown</td>
 		                                {% endif %}
-                                        <td><img src="{% static 'img/zelax.png' %}"></td>
-		                                <td>{{ sd.device_type }}</td>
-		                                <td><a href="{% url 'devices:sdn_detail' sd.datapathid %}">{{ sd.hostname }}</a></td> 
-		                                <td> {{ sd.ip }} </td>
-		                                <td> {{ sd.protocol_vers }} </td>
+                                        <td align="center"><img src="{% static 'img/zelax.png' %}"></td>
+                                        <td align="center"><a href="{% url 'devices:sdn_detail' sd.datapathid %}">{{ sd.hostname }}</a></td> 
+		                                
+		                                
+		                                <td align="center"> {{ sd.ip }} </td>
+                                        <td align="center">{{ sd.device_type }}</td>
+		                                <td align="center"> 1.0 </td>
 		                            </tr>
 		                            
 	                            {% endfor %}

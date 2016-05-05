@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from subprocess import check_output, CalledProcessError
 import json
 
-from .models import Device
+from .models import Device, SDN_Device
 
 # assert False, request.POST
 
@@ -20,7 +20,7 @@ def Int2IP(ipnum):
 
 def get_topo_local():
     try:
-        with open("/home/tsibulya/sdn/devices/topo_real.json") as topo_file:
+        with open("/home/tsibulya/sdn/devices/topo_real2.json") as topo_file:
             topology = json.load(topo_file)
     except OSError:
         topology = dict()
@@ -30,7 +30,7 @@ def get_topo_local():
 
 def get_topo_prod():
     p = "python"
-    path = "/root/projects/marrow/modules-uspace/marrow.py"
+    path = "/root/projects/marrow/modules_uspace/marrow.py"
     cmd = "topology"
     try:
         topology = json.loads(check_output([p, path, cmd]).decode('utf-8'))
@@ -42,7 +42,7 @@ def get_topo_prod():
 
 def get_of_local():
     try:
-        with open("/home/tsibulya/sdn/devices/device_real3.json") as js:
+        with open("/home/tsibulya/sdn/devices/device_real4.json") as js:
             of_device = json.load(js)
     except (OSError, ValueError):
         of_device = dict()
@@ -72,7 +72,7 @@ def get_services_local():
 
 def get_services_prod():
     p = "python"
-    path = "/root/projects/marrow/modules-uspace/marrow.py"
+    path = "/root/projects/marrow/modules_uspace/marrow.py"
     cmd = "tunnels"
     try:
         services = json.loads(check_output([p, path, cmd]).decode('utf-8'))
@@ -116,7 +116,10 @@ def topology_generator():
                     if (len(str(link["P1"])) > 3):
                         temp_dict["port_src"] = Int2IP(link["P1"])
                     elif (link["P1"] == 0):
-                        temp_dict["port_src"] = link["P1"]
+                        if (node["id"] == 83917578):
+                            temp_dict["port_src"] = "GE-1/0/7"
+                        else:
+                            temp_dict["port_src"] = "GE-1/0/0"
                     else:
                         temp_dict["port_src"] = "Ethernet 1/0/" \
                                                 + str(link["P1"])
@@ -145,12 +148,18 @@ def topology_generator():
                     for sw in json_device["Switches"]:
                         if (str(sw['DatapathId']) == str(node["name"])):
                             node['DatapathId'] = sw['DatapathId']
-                            node["name"] = sw["name"]
+                            sdn = SDN_Device.objects.get(ip=sw["name"])
+                            node["name"] = sdn.hostname
                             node["IpAddress"] = sw["IpAddress"]
                             node["ip_conn"] = sw["IpAddressConn"]
-                            node["device_type"] = sw["TypeOfSwitch"]
-                            node["protocol_vers"] = sw["ProtocolVersion"]
                             node["company"] = sw["CompanyName"]
+                            node["device_type"] = sw["TypeOfSwitch"]
+                            if (sw['Dpdescr'] == "Zelax-MM-1015"):
+                                node["device_type"] = "Zelax-MM-1015"
+                                node["company"] = "Zelax"
+                            else:
+                                node["device_type"] = "ZES-3028"
+                            node["protocol_vers"] = sw["ProtocolVersion"]
                             node["port"] = sw["portNumber"]
                             node["hw_address"] = sw["hardwareAddress"]
                             node["serial"] = sw["SN"]
@@ -212,8 +221,12 @@ def device_list_view(request):
         for sw in json_sdn["Switches"]:
             temp_dict = dict()
             temp_dict["status"] = 1
-            temp_dict["device_type"] = sw["TypeOfSwitch"]
-            temp_dict["hostname"] = sw["name"]
+            if (sw['Dpdescr'] == "Zelax-MM-1015"):
+                temp_dict["device_type"] = "Zelax-MM-1015"
+            else:
+                temp_dict["device_type"] = "ZES-3028"
+            sdn = SDN_Device.objects.get(ip=sw["name"])
+            temp_dict["hostname"] = sdn.hostname
             temp_dict["ip"] = sw["IpAddress"]
             temp_dict["protocol_vers"] = sw["ProtocolVersion"]
             temp_dict["datapathid"] = sw["DatapathId"]
@@ -237,8 +250,9 @@ def device_sdn_view(request, pk):
     else:
         for sw in json_sdn["Switches"]:
             if (sw["DatapathId"] == pk):
+                sdn = SDN_Device.objects.get(ip=sw["name"])
                 return render(request, 'devices/index_sdn_detail.html',
-                              {'node': sw})
+                              {'node': sw, 'sdn': sdn})
         raise Http404("No such sdn device!")
 
 
@@ -266,7 +280,7 @@ def service_add_view(request):
             return HttpResponse('fail')
 
         p = "python"
-        path = "/root/projects/marrow/modules-uspace/marrow.py"
+        path = "/root/projects/marrow/modules_uspace/marrow.py"
         cmd = "create-tunnel"
         src = "-S="
         dst = "-D="
@@ -277,9 +291,10 @@ def service_add_view(request):
         src_name = str(request.POST["nodes[0][name]"])
         dst_name = str(request.POST["nodes[1][name]"])
         for sw in json_device["Switches"]:
-            if (str(sw["name"]) == src_name):
+            sdn = SDN_Device.objects.get(ip=sw["name"])
+            if (str(sdn.hostname) == src_name):
                 src += str(sw["DatapathId"])
-            elif (str(sw["name"]) == dst_name):
+            elif (str(sdn.hostname) == dst_name):
                 dst += str(sw["DatapathId"])
 
         src_port_name = str(request.POST['nodes[0][physical]'])
@@ -339,7 +354,8 @@ def service_detail_view(request, pk):
                     added = False
                     for sw in json_device["Switches"]:
                         if (str(node) == sw["DatapathId"]):
-                            path += str(sw["name"])
+                            sdn = SDN_Device.objects.get(ip=sw["name"])
+                            path += str(sdn.hostname)
                             added = True
                     if (added is False):
                         legacy = Device.objects.get(cust_ip=str(Int2IP(node)))
@@ -355,10 +371,11 @@ def service_detail_view(request, pk):
                 temp_dict["active_path"] = serv["active_path"]
                 if (data_flag is True):
                     for sw in json_device["Switches"]:
+                        sdn = SDN_Device.objects.get(ip=sw["name"])
                         if (str(serv["src"]) == sw["DatapathId"]):
-                            temp_dict["src"] = sw["name"]
+                            temp_dict["src"] = sdn.hostname
                         elif (str(serv["dst"]) == sw["DatapathId"]):
-                            temp_dict["dst"] = sw["name"]
+                            temp_dict["dst"] = sdn.hostname
                 else:
                     temp_dict["src"] = serv["src"]
                     temp_dict["dst"] = serv["dst"]
@@ -377,7 +394,7 @@ def service_list_view(request):
         post_name = str(request.POST['name'])
 
         p = "python"
-        path = "/root/projects/marrow/modules-uspace/marrow.py"
+        path = "/root/projects/marrow/modules_uspace/marrow.py"
         cmd = "remove-tunnel"
         name = "-N=" + post_name
 
@@ -417,10 +434,11 @@ def service_list_view(request):
                 temp_dict["dst_port"] = "Ethernet1/0/" + str(serv["dst_port"])
                 if (data_flag is True):
                     for sw in json_device["Switches"]:
+                        sdn = SDN_Device.objects.get(ip=sw["name"])
                         if (str(serv["src"]) == sw["DatapathId"]):
-                            temp_dict["src"] = sw["name"]
+                            temp_dict["src"] = sdn.hostname
                         elif (str(serv["dst"]) == sw["DatapathId"]):
-                            temp_dict["dst"] = sw["name"]
+                            temp_dict["dst"] = sdn.hostname
                 else:
                     temp_dict["src"] = serv["src"]
                     temp_dict["dst"] = serv["dst"]
@@ -506,7 +524,8 @@ def service_refresh(request):
                 added = False
                 for sw in ofsw_data["Switches"]:
                     if (str(node) == sw["DatapathId"]):
-                        path += str(sw["name"])
+                        sdn = SDN_Device.objects.get(ip=sw["name"])
+                        path += str(sdn.hostname)
                         added = True
                 if (added is False):
                     legacy = Device.objects.get(cust_ip=str(Int2IP(node)))

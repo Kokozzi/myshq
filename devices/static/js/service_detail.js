@@ -109,14 +109,21 @@ function OnClickNode(d) {
         overlayInner = d3.select(".njg-overlay > .njg-inner"),
         html = "<h4>" + d.name + "</h4>";
     html += '<table class="table table-striped"><tbody>';
-    html += '<tr><th scope="row">Device Type</th><td>' + d.device_type + '</td></tr>';
-    html += '<tr><th scope="row">Protocol ver.</th><td>' + d.protocol_vers + '</td></tr>';
-    html += '<tr><th scope="row">Vendor</th><td>' + d.company + '</td></tr>';
-    html += '<tr><th scope="row">IP Address</th><td>' + d.IpAddress + '</td></tr>';
-    html += '<tr><th scope="row">IP Connection</th><td>' + d.ip_conn + '</td></tr>';
-    html += '<tr><th scope="row">Port</th><td>' + d.port + '</td></tr>';
-    html += '<tr><th scope="row">HW Address</th><td>' + d.hw_address + '</td></tr>';
-    html += '<tr><th scope="row">Serial</th><td>' + d.serial + '</td></tr>';
+    html += '<tr><th scope="row">Модель</th><td>' + d.device_type + '</td></tr>';
+    if (d.company == "Zelax") {
+        html += '<tr><th scope="row">Тип протокола</th><td>OpenFlow</td></tr>';
+    } else {
+        html += '<tr><th scope="row">Тип протокола</th><td>PCEP</td></tr>';
+    }
+    html += '<tr><th scope="row">Версия протокола</th><td>1.0</td></tr>';
+    html += '<tr><th scope="row">Производитель</th><td>' + d.company + '</td></tr>';
+    html += '<tr><th scope="row">IP адрес</th><td>' + d.IpAddress + '</td></tr>';
+    html += '<tr><th scope="row">IP контроллера</th><td>192.168.123.81</td></tr>';
+    html += '<tr><th scope="row">Порт</th><td>6653</td></tr>';
+    if (d.company == "Zelax") {
+        html += '<tr><th scope="row">MAC-Адрес</th><td>' + d.hw_address + '</td></tr>';
+    }
+    html += '<tr><th scope="row">Серийный номер</th><td>' + d.serial + '</td></tr>';
     html += '</tbody></table>';
     overlayInner.html(html);
     overlay.classed("njg-hidden", false);

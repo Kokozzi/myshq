@@ -132,42 +132,49 @@ function OnClickNode(d) {
         overlayInner = d3.select(".njg-overlay > .njg-inner"),
         html = "<h4>" + d.name + "</h4>";
     html += '<table class="table table-striped"><tbody>';
-    html += '<tr><th scope="row">Device Type</th><td>' + d.device_type + '</td></tr>';
-    html += '<tr><th scope="row">Protocol ver.</th><td>' + d.protocol_vers + '</td></tr>';
-    html += '<tr><th scope="row">Vendor</th><td>' + d.company + '</td></tr>';
-    html += '<tr><th scope="row">IP Address</th><td>' + d.IpAddress + '</td></tr>';
-    html += '<tr><th scope="row">IP Connection</th><td>' + d.ip_conn + '</td></tr>';
-    html += '<tr><th scope="row">Port</th><td>' + d.port + '</td></tr>';
-    html += '<tr><th scope="row">HW Address</th><td>' + d.hw_address + '</td></tr>';
-    html += '<tr><th scope="row">Serial</th><td>' + d.serial + '</td></tr>';
+    html += '<tr><th scope="row">Модель</th><td>' + d.device_type + '</td></tr>';
+    if (d.company == "Zelax") {
+        html += '<tr><th scope="row">Тип протокола</th><td>OpenFlow</td></tr>';
+    } else {
+        html += '<tr><th scope="row">Тип протокола</th><td>PCEP</td></tr>';
+    }
+    html += '<tr><th scope="row">Версия протокола</th><td>1.0</td></tr>';
+    html += '<tr><th scope="row">Производитель</th><td>' + d.company + '</td></tr>';
+    html += '<tr><th scope="row">IP адрес</th><td>' + d.IpAddress + '</td></tr>';
+    html += '<tr><th scope="row">IP контроллера</th><td>192.168.123.81</td></tr>';
+    html += '<tr><th scope="row">Порт</th><td>6653</td></tr>';
+    if (d.company == "Zelax") {
+        html += '<tr><th scope="row">MAC-Адрес</th><td>' + d.hw_address + '</td></tr>';
+    }
+    html += '<tr><th scope="row">Серийный номер</th><td>' + d.serial + '</td></tr>';
     html += '</tbody></table>';
     overlayInner.html(html);
     overlay.classed("njg-hidden", false);
     overlay.style("display", "block");
     
     var connlist_label = d3.select(".ibox-title");
-    html = "<h5>" + d.name + " Links</h5>";
+    html = "<h5>Активные соединения " + d.name + "</h5>";
     connlist_label.html(html);
     
     var connlist_device = d3.select("#link_inf");
-    html = '<thead><tr><th>Active Port</th><th>Neighbour</th><th>Neighbour Port</th><th>Bandwidth</th></tr></thead><tbody>';
+    html = '<thead><tr><th>Исходящий порт</th><th>Связанное устройство</th><th>Порт назначения</th></tr></thead><tbody>';
     var flag = 0;
     for (var i = 0; i < data.links.length; i++) 
     {
         if (data.links[i].source.id == d.id)
         {
-            html += '<tr><td>' + data.links[i].port_src + '</td><td>' + data.links[i].target.name + '</td><td>' + data.links[i].port_dst + '</td><td>' + data.links[i].Bandwidth + ' Mbit/s</td></tr>';
+            html += '<tr><td>' + data.links[i].port_src + '</td><td>' + data.links[i].target.name + '</td><td>' + data.links[i].port_dst + '</td></tr>';
             flag = 1;
         }
         if (data.links[i].target.id == d.id)
         {
-            html += '<tr><td>' + data.links[i].port_dst + '</td><td>' + data.links[i].source.name + '</td><td>' + data.links[i].port_src + '</td><td>' + data.links[i].Bandwidth + ' Mbit/s</td></tr>';
+            html += '<tr><td>' + data.links[i].port_dst + '</td><td>' + data.links[i].source.name + '</td><td>' + data.links[i].port_src + '</td></tr>';
             flag = 1;
         }
     }
     if (flag == 0)
     {
-        html += '<tr><td>No Active Links</td></tr>'
+        html += '<tr><td>Нет активных соединений</td></tr>'
     }
     html += '</tbody>';
     connlist_device.html(html);
@@ -196,12 +203,12 @@ function onClickLink(d) {
     overlay.classed("njg-hidden", true);
     
     var connlist_label = d3.select(".ibox-title");
-    var html = "<h5>Link: " + d.source.name + " - " + d.target.name + "</h5>";
+    var html = "<h5>Связь между " + d.source.name + " и " + d.target.name + "</h5>";
     connlist_label.html(html);
     
     var connlist_link = d3.select("#link_inf");
-    html = '<thead><tr><th>' + d.source.name + ' Port</th><th>' + d.target.name + ' Port</th><th>Bandwidth</th></tr></thead>';
-    html += '<tbody><tr><td>' + d.port_src + '</td><td>' + d.port_dst + '</td><td>' + d.Bandwidth + ' Mbit/s</td></tr></tbody>';
+    html = '<thead><tr><th>Порт ' + d.source.name + '</th><th>Порт ' + d.target.name + '</th></tr></thead>';
+    html += '<tbody><tr><td>' + d.port_src + '</td><td>' + d.port_dst + '</td></tr></tbody>';
     connlist_link.html(html);
 
     connlist.attr("class", "connlist-visible");
@@ -245,6 +252,9 @@ function tick() {
     // Add tooltip to the connection path
     path.append("svg:title")
         .text(function(d, i) { return d.name; });
+
+    circle.append("svg:title")
+        .text(function(d, i) { return d.IpAddress; });
 
     circle.attr("transform", function(d) {
         return "translate(" + d.x + "," + d.y + ")"; });

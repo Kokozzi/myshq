@@ -1,0 +1,161 @@
+{
+"Switches":[ 
+{ "name": "192.168.123.91",		"DatapathId": "113833460647",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.91",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Zelax",		"TypeOfSwitch": "Reference Userspace Switch",                "ProtocolVersion": "10",		"SN": "None",		"SoftVersion": "1.0",	"Dpdescr": "dp description is unknown",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",	"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/3",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/4",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/5",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/6",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/7",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/8",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/9",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/10",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "1",	       "TxB": "0",		       "RxB": "3",		       "TxP": "0",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/11",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "1",	       "TxB": "361",		       "RxB": "3",		       "TxP": "49630",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/12",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/13",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/14",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/15",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/16",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/21",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/22",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/23",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/25",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/26",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/27",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/28",		       "hw_addr": "00:1a:81:00:c3:a7",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+},
+{ "name": "192.168.123.62",		"DatapathId": "113833460651",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.62",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Zelax",		"TypeOfSwitch": "Reference Userspace Switch",                "ProtocolVersion": "10",		"SN": "None",		"SoftVersion": "1.0",	"Dpdescr": "dp description is unknown",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",	"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9",		       "hw_addr": "00:1a:81:00:c3:ab",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/10",		       "hw_addr": "00:1a:81:00:c3:ab",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/11",		       "hw_addr": "00:1a:81:00:c3:ab",		       "connection_status": "1",	       "TxB": "795",		       "RxB": "3",		       "TxP": "77330",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/12",		       "hw_addr": "00:1a:81:00:c3:ab",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+},
+{ "name": "192.168.123.63",		"DatapathId": "113833410564",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.63",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Zelax",		"TypeOfSwitch": "Reference Userspace Switch",                "ProtocolVersion": "10",		"SN": "None",		"SoftVersion": "1.0",	"Dpdescr": "dp description is unknown",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",	"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9",		       "hw_addr": "00:1a:81:00:00:04",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/10",		       "hw_addr": "00:1a:81:00:00:04",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/11",		       "hw_addr": "00:1a:81:00:00:04",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/12",		       "hw_addr": "00:1a:81:00:00:04",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+},
+{ "name": "192.168.123.61",		"DatapathId": "113833460649",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.61",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Zelax",		"TypeOfSwitch": "Reference Userspace Switch",                "ProtocolVersion": "10",		"SN": "None",		"SoftVersion": "1.0",	"Dpdescr": "dp description is unknown",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",	"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/9",		       "hw_addr": "00:1a:81:00:c3:a9",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/10",		       "hw_addr": "00:1a:81:00:c3:a9",		       "connection_status": "1",	       "TxB": "0",		       "RxB": "3",		       "TxP": "0",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/11",		       "hw_addr": "00:1a:81:00:c3:a9",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/12",		       "hw_addr": "00:1a:81:00:c3:a9",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+},
+{ "name": "192.168.123.92",		"DatapathId": "113833455547",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.92",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": "Zelax",		"TypeOfSwitch": "Reference Userspace Switch",                "ProtocolVersion": "10",		"SN": "None",		"SoftVersion": "1.0",	"Dpdescr": "dp description is unknown",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",	"peerFeatures": "peerFeatures","Ports":[
+{"name": "Ethernet1/0/2",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/9",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "1",	       "TxB": "3",		       "RxB": "3",		       "TxP": "192",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/10",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "1",	       "TxB": "255",		       "RxB": "3",		       "TxP": "103512",		       "RXP": "192",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/11",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/12",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Ethernet1/0/23",		       "hw_addr": "00:1a:81:00:af:bb",		       "connection_status": "0",	       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+},
+{ "name": "192.168.123.93",		"DatapathId": "113833463872",		"IpAddressConn": "192.168.123.81",		"IpAddress": "192.168.123.93",   	        "portNumber": "6653",		"hardwareAddress": "00:00:00:00:00:00:01",	"DateStartConn": "25.11.2015",	        "TimeStartConn": "10:00",		"CompanyName": " ",		"TypeOfSwitch": "00.00.02",                "ProtocolVersion": "10",		"SN": "2452000020",		"SoftVersion": "2.0.19",	"Dpdescr": "Zelax-MM-1015",		"config": "config",		"state": "1",  	        "currentFeatures": "currentFeatures",		"advertisedFeatures": "advertisedFeatures",		"supportedFeatures": "supportedFeatures",		"peerFeatures": "peerFeatures","Ports":[
+{"name": "gi1/1/1",		       "hw_addr": "00:1a:81:00:d0:41",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/2",		       "hw_addr": "00:1a:81:00:d0:42",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/3",		       "hw_addr": "00:1a:81:00:d0:43",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/4",		       "hw_addr": "00:1a:81:00:d0:44",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/5",		       "hw_addr": "00:1a:81:00:d0:45",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/6",		       "hw_addr": "00:1a:81:00:d0:46",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/7",		       "hw_addr": "00:1a:81:00:d0:47",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/8",		       "hw_addr": "00:1a:81:00:d0:48",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/9",		       "hw_addr": "00:1a:81:00:d0:49",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/10",		       "hw_addr": "00:1a:81:00:d0:4a",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/11",		       "hw_addr": "00:1a:81:00:d0:4b",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/12",		       "hw_addr": "00:1a:81:00:d0:4c",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/13",		       "hw_addr": "00:1a:81:00:d0:4d",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/14",		       "hw_addr": "00:1a:81:00:d0:4e",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/15",		       "hw_addr": "00:1a:81:00:d0:4f",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/16",		       "hw_addr": "00:1a:81:00:d0:50",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/17",		       "hw_addr": "00:1a:81:00:d0:51",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/18",		       "hw_addr": "00:1a:81:00:d0:52",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/19",		       "hw_addr": "00:1a:81:00:d0:53",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/20",		       "hw_addr": "00:1a:81:00:d0:54",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/21",		       "hw_addr": "00:1a:81:00:d0:55",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/22",		       "hw_addr": "00:1a:81:00:d0:56",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/23",		       "hw_addr": "00:1a:81:00:d0:57",		       "connection_status": "1",		       "TxB": "3",		       "RxB": "257",		       "TxP": "192",		       "RXP": "103986",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "gi1/1/24",		       "hw_addr": "00:1a:81:00:d0:58",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "te1/1/1",		       "hw_addr": "00:1a:81:00:d0:59",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "te1/1/2",		       "hw_addr": "00:1a:81:00:d0:5a",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "te1/1/3",		       "hw_addr": "00:1a:81:00:d0:5b",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "te1/1/4",		       "hw_addr": "00:1a:81:00:d0:5c",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "Po1",		       "hw_addr": "00:1a:81:00:d0:40",		       "connection_status": "0",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "",		       "hw_addr": "00:1a:81:00:00:00",		       "connection_status": "1",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+,
+{"name": "",		       "hw_addr": "00:00:00:00:00:00",		       "connection_status": "1",		       "TxB": "0",		       "RxB": "0",		       "TxP": "0",		       "RXP": "0",		       "TxD": "0",		       "RxD": "0",		       "TxE": "0",		       "RxE": "0",		       "RxF": "0",		       "RxO": "0",		       "RxC": "0",		       "Col": "0",		       "Error": "Error"}
+] 
+}], 
+"Links":[
+{"port_src": "Ethernet1/0/10",		       "port_dst": "Ethernet1/0/10",		       "switch_src": "113833460651",	"switch_dst": "113833410564",			"Link_found": "1",			"State": "1",		       "Bandwidth": "0"},
+{"port_src": "Ethernet1/0/9",		       "port_dst": "Ethernet1/0/12",		       "switch_src": "113833410564",	"switch_dst": "113833460649",			"Link_found": "1",			"State": "1",		       "Bandwidth": "0"},
+{"port_src": "Ethernet1/0/9",		       "port_dst": "Ethernet1/0/9",		       "switch_src": "113833460649",	"switch_dst": "113833460651",			"Link_found": "1",			"State": "1",		       "Bandwidth": "0"},
+{"port_src": "Ethernet1/0/9",		       "port_dst": "Ethernet1/0/9",		       "switch_src": "113833455547",	"switch_dst": "113833460647",			"Link_found": "1",			"State": "1",		       "Bandwidth": "0"},
+{"port_src": "gi1/1/23",		       "port_dst": "Ethernet1/0/10",		       "switch_src": "113833463872",	"switch_dst": "113833455547",			"Link_found": "1",			"State": "1",		       "Bandwidth": "0"}] 
+}
