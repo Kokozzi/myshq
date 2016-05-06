@@ -91,9 +91,13 @@ $(function () {
         document.getElementById("ip_input").value = "";
         document.getElementById("udp_port_input").value = "";
         var html = "<option></option>";
-        for (var i = 0; i < d.Ports.length; i++) 
-        {
-            html += "<option>" + d.Ports[i].name + "</option>";
+        if (d.company == "Zelax") {
+            for (var i = 0; i < d.Ports.length; i++) 
+            {
+                if (d.Ports[i].used == 0) {
+                    html += "<option>" + d.Ports[i].name + "</option>";
+                }
+            }
         }
         $("#port_select").html(html);
     } 

@@ -95,6 +95,9 @@ def topology_generator():
         data_flag = False
     else:
         data_flag = True
+    ##
+    services = get_services_local()
+    # services = get_services_prod()
 
     id_dict = dict()
     temp_arr = list()
@@ -121,14 +124,14 @@ def topology_generator():
                         else:
                             temp_dict["port_src"] = "GE-1/0/0"
                     else:
-                        temp_dict["port_src"] = "Ethernet 1/0/" \
+                        temp_dict["port_src"] = "Ethernet1/0/" \
                                                 + str(link["P1"])
                     if (len(str(link["P2"])) > 3):
                         temp_dict["port_dst"] = Int2IP(link["P2"])
                     elif (link["P2"] == 0):
                         temp_dict["port_dst"] = link["P2"]
                     else:
-                        temp_dict["port_dst"] = "Ethernet 1/0/" \
+                        temp_dict["port_dst"] = "Ethernet1/0/" \
                                                 + str(link["P2"])
                     temp_dict["status"] = link["ST"]
                     temp_dict["Bandwidth"] = link["BW"]
@@ -192,7 +195,63 @@ def topology_generator():
         link['name'] = link_name
         link['source'] = id_dict[link['source']]
         link['target'] = id_dict[link['target']]
-
+    for node in json_data['nodes']:
+        if (node['company'] == "Zelax"):
+            if (node['device_type'] == "Zelax-MM-1015"):
+                for port in node['Ports']:
+                    used_port = False
+                    if (str(port['name']).startswith("gi")):
+                        p_name = str(port['name']).split("/")
+                        nm = "Ethernet1/0/" + p_name[2]
+                    else:
+                        nm = port['name']
+                    for link in json_data['links']:
+                        if (node["id"] == link["source"]):
+                            if (nm == link['port_src']):
+                                port["used"] = 1
+                                used_port = True
+                        elif (node["id"] == link["target"]):
+                            if (nm == link['port_dst']):
+                                port["used"] = 1
+                                used_port = True
+                    for serv in services["tunnels"]:
+                        if (str(serv['src']) == str(node['DatapathId'])):
+                            src_port = "Ethernet1/0/" + str(serv["src_port"])
+                            if (port['name'] == src_port):
+                                port["used"] = 1
+                                used_port = True
+                        if (str(serv['dst']) == str(node['DatapathId'])):
+                            dst_port = "Ethernet1/0/" + str(serv["dst_port"])
+                            if (port['name'] == dst_port):
+                                port["used"] = 1
+                                used_port = True
+                    if (used_port is not True):
+                        port["used"] = 0
+            else:
+                for port in node['Ports']:
+                    used_port = False
+                    for link in json_data['links']:
+                        if (node["id"] == link["source"]):
+                            if (port['name'] == link['port_src']):
+                                port["used"] = 1
+                                used_port = True
+                        elif (node["id"] == link["target"]):
+                            if (port['name'] == link['port_dst']):
+                                port["used"] = 1
+                                used_port = True
+                    for serv in services["tunnels"]:
+                        if (str(serv['src']) == str(node['DatapathId'])):
+                            src_port = "Ethernet1/0/" + str(serv["src_port"])
+                            if (port['name'] == src_port):
+                                port["used"] = 1
+                                used_port = True
+                        if (str(serv['dst']) == str(node['DatapathId'])):
+                            dst_port = "Ethernet1/0/" + str(serv["dst_port"])
+                            if (port['name'] == dst_port):
+                                port["used"] = 1
+                                used_port = True
+                    if (used_port is not True):
+                        port["used"] = 0
     return json_data
 
 
